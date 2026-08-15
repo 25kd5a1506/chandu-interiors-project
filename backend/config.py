@@ -10,9 +10,13 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 
     # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
+    database_url = os.environ.get(
         "DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'leads.db')}"
     )
+    # Fix PostgreSQL URL scheme (Render uses postgres://, SQLAlchemy needs postgresql://)
+    if database_url and database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = database_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # File uploads
