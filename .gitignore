@@ -1,0 +1,17 @@
+# Python
+backend/venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Environment secrets
+backend/.env
+
+# Database & uploads (local data, not code)
+backend/leads.db
+backend/static/uploads/*
+!backend/static/uploads/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/*.log

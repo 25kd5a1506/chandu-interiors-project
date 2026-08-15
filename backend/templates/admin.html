@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — Chandu Interiors Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1d1b18; --stone:#ece6dc; --stone-2:#e2dacb; --charcoal:#4a463f; --sage:#57654c; --sage-dark:#3c4635; --brass:#b08d57; --line:rgba(29,27,24,0.14); }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--stone); color:var(--ink); font-family:'Inter',sans-serif; }
+  header{ background:var(--ink); color:var(--stone); padding:22px 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  header h1{ font-family:'Instrument Serif',serif; font-weight:400; font-size:24px; }
+  header h1 em{ color:var(--brass); font-style:italic; }
+  header a.logout{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--stone); border:1px solid var(--brass); padding:9px 16px; }
+  header a.logout:hover{ background:var(--brass); color:var(--ink); }
+  main{ max-width:1180px; margin:0 auto; padding:32px; }
+  .filters{ display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
+  .filters a{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:9px 16px; border:1px solid var(--line); color:var(--charcoal); text-decoration:none;
+  }
+  .filters a.active{ background:var(--sage-dark); color:var(--stone); border-color:var(--sage-dark); }
+  table{ width:100%; border-collapse:collapse; background:white; }
+  th, td{ text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+  th{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); background:var(--stone-2); }
+  tr:hover{ background:#faf8f3; }
+  .badge{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; padding:4px 9px; display:inline-block; }
+  .badge.new{ background:#dfe6d6; color:var(--sage-dark); }
+  .badge.contacted{ background:#f0e2c4; color:#8a5f1f; }
+  .badge.closed{ background:#e3ddd2; color:var(--charcoal); }
+  .details-cell{ max-width:260px; }
+  select{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:6px 8px; border:1px solid var(--line); background:var(--stone); }
+  .row-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .row-actions button{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.03em; text-transform:uppercase;
+    background:none; border:1px solid var(--line); padding:6px 10px; cursor:pointer; color:var(--charcoal);
+  }
+  .row-actions button:hover{ border-color:var(--brass); color:var(--brass); }
+  .empty{ text-align:center; padding:60px 20px; color:var(--charcoal); font-family:'Instrument Serif',serif; font-size:22px; }
+  .photos a{ font-size:12px; color:var(--sage-dark); display:block; margin-bottom:3px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Chandu <em>Interiors</em> — Leads</h1>
+  <a class="logout" href="{{ url_for('admin_logout') }}">Log Out</a>
+</header>
+<main>
+  <div class="filters">
+    <a href="{{ url_for('admin_dashboard', status='all') }}" class="{{ 'active' if active_filter=='all' }}">All ({{ counts.all }})</a>
+    <a href="{{ url_for('admin_dashboard', status='new') }}" class="{{ 'active' if active_filter=='new' }}">New ({{ counts.new }})</a>
+    <a href="{{ url_for('admin_dashboard', status='contacted') }}" class="{{ 'active' if active_filter=='contacted' }}">Contacted ({{ counts.contacted }})</a>
+    <a href="{{ url_for('admin_dashboard', status='closed') }}" class="{{ 'active' if active_filter=='closed' }}">Closed ({{ counts.closed }})</a>
+  </div>
+
+  {% if leads %}
+  <table>
+    <thead>
+      <tr>
+        <th>Received</th>
+        <th>Name</th>
+        <th>Phone / WhatsApp</th>
+        <th>Location</th>
+        <th>Service</th>
+        <th>Details</th>
+        <th>Photos</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lead in leads %}
+      <tr>
+        <td>{{ lead.created_at.strftime('%d %b, %I:%M %p') }}</td>
+        <td>{{ lead.name }}</td>
+        <td>{{ lead.phone }}{% if lead.whatsapp %}<br><span style="color:#57654c;">{{ lead.whatsapp }}</span>{% endif %}</td>
+        <td>{{ lead.location or '—' }}</td>
+        <td>{{ lead.service or '—' }}</td>
+        <td class="details-cell">{{ lead.details or '—' }}</td>
+        <td class="photos">
+          {% if lead.photos %}
+            {% for p in lead.photos.split(',') %}
+              <a href="{{ url_for('uploaded_file', filename=p) }}" target="_blank">{{ loop.index }}. view</a>
+            {% endfor %}
+          {% else %}—{% endif %}
+        </td>
+        <td><span class="badge {{ lead.status }}">{{ lead.status }}</span></td>
+        <td>
+          <div class="row-actions">
+            <form method="POST" action="{{ url_for('update_lead_status', lead_id=lead.id) }}">
+              <select name="status" onchange="this.form.submit()">
+                <option value="new" {{ 'selected' if lead.status=='new' }}>New</option>
+                <option value="contacted" {{ 'selected' if lead.status=='contacted' }}>Contacted</option>
+                <option value="closed" {{ 'selected' if lead.status=='closed' }}>Closed</option>
+              </select>
+            </form>
+            <form method="POST" action="{{ url_for('delete_lead', lead_id=lead.id) }}" onsubmit="return confirm('Delete this lead?');">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty">No leads yet in this view.</div>
+  {% endif %}
+</main>
+</body>
+</html>

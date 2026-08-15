@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Chandu Interiors</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1d1b18; --stone:#ece6dc; --sage:#57654c; --sage-dark:#3c4635; --brass:#b08d57; --line:rgba(29,27,24,0.14); }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink); color:var(--stone); font-family:'Inter',sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .card{ background:var(--stone); color:var(--ink); width:100%; max-width:380px; padding:44px 36px; border:1px solid var(--line); }
+  h1{ font-family:'Instrument Serif', serif; font-weight:400; font-size:30px; margin-bottom:6px; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass); margin-bottom:18px; display:block;}
+  .field{ margin-bottom:18px; display:flex; flex-direction:column; gap:7px; }
+  label{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#4a463f; }
+  input{ border:none; border-bottom:1px solid var(--line); background:transparent; padding:10px 2px; font-size:15.5px; font-family:'Inter',sans-serif; }
+  input:focus{ outline:none; border-bottom-color:var(--brass); }
+  button{
+    width:100%; margin-top:8px; padding:13px; background:var(--sage-dark); color:var(--stone);
+    border:none; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase;
+    cursor:pointer; transition:background .2s ease;
+  }
+  button:hover{ background:var(--ink); }
+  .flash{ background:#f4d9d0; color:#7a2f1c; padding:10px 12px; font-size:13.5px; margin-bottom:18px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="eyebrow">Chandu Interiors</span>
+    <h1>Admin Login</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandu Interiors | Interior Design, Furniture &amp; Woodwork</title>
+<meta name="description" content="Chandu Interiors offers customized furniture, wardrobes, modular kitchens, TV units, false ceilings, woodwork and complete interior solutions. Contact us for a free quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1b18;
+    --stone:#ece6dc;
+    --stone-2:#e2dacb;
+    --charcoal:#4a463f;
+    --sage:#57654c;
+    --sage-dark:#3c4635;
+    --brass:#b08d57;
+    --clay:#9c5a3c;
+    --line: rgba(29,27,24,0.14);
+    --line-light: rgba(236,230,220,0.18);
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  h1,h2,h3{font-family:'Instrument Serif', serif; font-weight:400; letter-spacing:-0.01em;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--sage); color:var(--stone);}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sage-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:''; width:20px; height:1px; background:var(--brass); display:inline-block;}
+  .on-dark .eyebrow{color:var(--brass);}
+  .on-dark .eyebrow::before{background:var(--brass);}
+
+  /* corner-bracket motif (signature element) — architectural crop marks */
+  .bracket{position:relative;}
+  .bracket::before, .bracket::after,
+  .bracket .bl, .bracket .br{
+    content:''; position:absolute; width:16px; height:16px; pointer-events:none;
+  }
+  .bracket::before{ top:-1px; left:-1px; border-top:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
+  .bracket::after{ top:-1px; right:-1px; border-top:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
+  .bracket .bl{ bottom:-1px; left:-1px; border-bottom:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
+  .bracket .br{ bottom:-1px; right:-1px; border-bottom:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
+
+  /* ---------- sticky action bar (mobile) ---------- */
+  .action-bar{
+    position:fixed; bottom:0; left:0; right:0; z-index:60;
+    display:none;
+    background:var(--ink);
+    border-top:1px solid var(--line-light);
+  }
+  .action-bar .wrap{padding:0 12px; display:flex;}
+  .action-bar a{
+    flex:1; text-align:center; padding:14px 8px;
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--stone); border-right:1px solid var(--line-light);
+  }
+  .action-bar a:last-child{border-right:none; color:var(--ink); background:var(--brass);}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(236,230,220,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; height:78px;}
+  .logo{font-family:'Instrument Serif', serif; font-size:23px; letter-spacing:0.01em;}
+  .logo em{font-style:italic; color:var(--sage-dark);}
+  nav{display:flex; align-items:center; gap:32px;}
+  nav a.navlink{font-size:14px; color:var(--charcoal); transition:color .2s ease;}
+  nav a.navlink:hover{color:var(--sage-dark);}
+  nav a.navlink:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:2px;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:12px 20px; border:1px solid var(--sage-dark); color:var(--sage-dark); background:transparent;
+    cursor:pointer; transition:background .2s ease, color .2s ease; display:inline-block; white-space:nowrap;
+  }
+  .btn:hover{background:var(--sage-dark); color:var(--stone);}
+  .btn.solid{background:var(--sage-dark); color:var(--stone); border-color:var(--sage-dark);}
+  .btn.solid:hover{background:var(--ink);}
+  .btn.brass{background:var(--brass); color:var(--ink); border-color:var(--brass);}
+  .btn.brass:hover{background:#c49f68;}
+  .btn.on-dark{border-color:var(--brass); color:var(--brass);}
+  .btn.on-dark:hover{background:var(--brass); color:var(--ink);}
+  .mobile-toggle{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; padding:186px 0 110px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 85% 0%, rgba(176,141,87,0.14), transparent 55%),
+      var(--stone);
+  }
+  .blueprint-lines{
+    position:absolute; inset:0; opacity:0.5; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(to bottom, black, transparent 75%);
+  }
+  .hero .inner{position:relative; z-index:2; max-width:740px;}
+  .hero h1{font-size:clamp(38px, 6vw, 70px); line-height:1.05; margin:20px 0 24px;}
+  .hero h1 em{font-style:italic; color:var(--sage-dark);}
+  .hero p.lede{font-size:18px; color:var(--charcoal); max-width:520px; margin-bottom:38px;}
+  .hero .ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  /* ---------- feature strip ---------- */
+  .features{background:var(--ink); color:var(--stone); padding:0;}
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line-light);
+  }
+  .feature-item{
+    padding:30px 26px; border-right:1px solid var(--line-light); border-bottom:1px solid var(--line-light);
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.03em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .feature-item::before{content:'—'; color:var(--brass);}
+  .feature-item:nth-child(4n){border-right:none;}
+
+  /* ---------- section shell ---------- */
+  section{padding:104px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:52px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(30px, 4vw, 46px);}
+  .section-head p{max-width:380px; color:var(--charcoal); font-size:15px;}
+  section.on-dark{background:var(--ink); color:var(--stone);}
+  section.on-dark .section-head p{color:#b9b3a6;}
+  section.on-tint{background:var(--stone-2);}
+
+  /* ---------- services ---------- */
+  .services-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line);}
+  .service-card{
+    background:var(--stone); padding:36px 30px; min-height:250px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:background .2s ease;
+  }
+  .service-card:hover{background:var(--stone-2);}
+  .service-card .num{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--brass);}
+  .service-card h3{font-size:26px; margin:18px 0 10px;}
+  .service-card p{font-size:14.5px; color:var(--charcoal); margin-bottom:16px;}
+  .service-card .tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .service-card .tags span{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase;
+    border:1px solid var(--line); padding:5px 9px; color:var(--sage-dark);
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:2px;}
+  .gallery-tile{
+    position:relative; aspect-ratio:4/3; overflow:hidden;
+    display:flex; align-items:flex-end; padding:22px;
+  }
+  .gallery-tile .tone{position:absolute; inset:0;}
+  .gallery-tile::after{content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(29,27,24,0.75), transparent 60%);}
+  .gallery-tile .label{position:relative; z-index:2; color:var(--stone);}
+  .gallery-tile .label .l1{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--brass); display:block; margin-bottom:4px;}
+  .gallery-tile .label .l2{font-family:'Instrument Serif', serif; font-size:24px;}
+
+  /* ---------- reviews ---------- */
+  .reviews-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .review-card{
+    border:1px solid var(--line); padding:30px; background:var(--stone);
+    position:relative;
+  }
+  .review-card .stars{color:var(--brass); font-size:15px; letter-spacing:2px; margin-bottom:16px;}
+  .review-card p{font-size:16.5px; font-style:italic; font-family:'Instrument Serif', serif; line-height:1.4;}
+
+  /* ---------- about / mission-vision ---------- */
+  .about-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:70px; align-items:start;}
+  .about-grid p{color:var(--charcoal); font-size:16.5px; margin-bottom:18px; max-width:520px;}
+  .mv-block{border:1px solid var(--line); padding:30px; margin-bottom:20px;}
+  .mv-block .eyebrow{margin-bottom:12px;}
+  .mv-block p{font-size:15px; color:var(--charcoal); max-width:none;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:var(--sage-dark); color:var(--stone); padding:90px 0; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .cta-band h2{font-size:clamp(32px, 5vw, 54px); margin-bottom:18px;}
+  .cta-band p{font-size:17px; color:#d8dccf; max-width:520px; margin:0 auto 36px;}
+  .cta-band .ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:'Instrument Serif', serif; font-size:21px; color:var(--ink);
+  }
+  .faq-q .plus{font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--brass); transition:transform .25s ease; flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{padding:0 0 24px; color:var(--charcoal); font-size:15.5px; max-width:640px;}
+
+  /* ---------- contact / quote ---------- */
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px;}
+  .contact-info h2{font-size:clamp(30px,4vw,44px); margin-bottom:18px;}
+  .contact-info p{color:var(--charcoal); font-size:16px; margin-bottom:30px; max-width:420px;}
+  .contact-detail{margin-bottom:18px;}
+  .contact-detail .l{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:4px; display:block;}
+  .contact-detail .v{font-size:16.5px;}
+  .hours{margin-top:26px; border-top:1px solid var(--line); padding-top:20px;}
+  .hours .row{display:flex; justify-content:space-between; font-size:14px; color:var(--charcoal); padding:5px 0;}
+
+  form{display:flex; flex-direction:column; gap:18px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field{display:flex; flex-direction:column; gap:7px;}
+  .field label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal);}
+  .field input, .field select, .field textarea{
+    background:var(--stone); border:none; border-bottom:1px solid var(--line);
+    color:var(--ink); font-family:'Inter', sans-serif; font-size:15.5px; padding:10px 2px;
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-bottom-color:var(--brass);}
+  .field textarea{resize:vertical; min-height:90px;}
+  form .submit-row{margin-top:6px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  .form-note{font-size:12.5px; color:var(--charcoal); opacity:0.8;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink); color:var(--stone); padding:64px 0 30px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px; margin-bottom:46px;}
+  .footer-logo{font-family:'Instrument Serif', serif; font-size:24px; margin-bottom:12px;}
+  .footer-grid p{color:#b9b3a6; font-size:14px; max-width:280px;}
+  .footer-col .eyebrow{color:var(--brass); margin-bottom:16px;}
+  .footer-col a, .footer-col div.line{display:block; font-size:14px; color:#c9c3b6; margin-bottom:11px;}
+  .footer-col a:hover{color:var(--brass);}
+  .footer-bottom{border-top:1px solid var(--line-light); padding-top:24px; display:flex; justify-content:space-between; font-size:12.5px; color:#8a8477; flex-wrap:wrap; gap:10px;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width: 880px){
+    nav{display:none;}
+    .mobile-toggle{display:flex; background:none; border:none; color:var(--ink); cursor:pointer; flex-direction:column; gap:5px; padding:6px;}
+    .mobile-toggle span{width:22px; height:2px; background:var(--sage-dark); display:block;}
+    header.open nav{
+      display:flex; position:absolute; top:78px; left:0; right:0; background:var(--stone);
+      flex-direction:column; padding:22px 32px; gap:18px; border-bottom:1px solid var(--line);
+    }
+    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .feature-item:nth-child(4n){border-right:1px solid var(--line-light);}
+    .feature-item:nth-child(2n){border-right:none;}
+    .services-grid, .gallery-grid, .reviews-grid{grid-template-columns:1fr;}
+    .about-grid, .contact-grid{grid-template-columns:1fr; gap:44px;}
+    .form-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:32px;}
+    .action-bar{display:block;}
+    body{padding-bottom:52px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="logo">Chandu <em>Interiors</em></a>
+    <nav id="mainNav">
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#gallery">Gallery</a>
+      <a class="navlink" href="#reviews">Reviews</a>
+      <a class="navlink" href="#about">About</a>
+      <a class="navlink" href="#faq">FAQ</a>
+      <a class="navlink btn" href="#quote">Get a Free Quote</a>
+    </nav>
+    <button class="mobile-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<section class="hero">
+  <div class="blueprint-lines"></div>
+  <div class="wrap inner">
+    <div class="eyebrow">Chandu Interiors</div>
+    <h1>Transforming houses into <em>beautiful</em> homes.</h1>
+    <p class="lede">From custom furniture and wardrobes to complete interior and woodwork solutions — quality materials, modern designs, and skilled craftsmanship, built for your space.</p>
+    <div class="ctas">
+      <a href="#quote" class="btn solid">Get a Free Quote</a>
+      <a href="https://wa.me/919390608457" class="btn">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<div class="features">
+  <div class="wrap">
+    <div class="feature-grid">
+      <div class="feature-item">Custom Designs</div>
+      <div class="feature-item">Quality Materials</div>
+      <div class="feature-item">Skilled Craftsmanship</div>
+      <div class="feature-item">On-Time Work</div>
+      <div class="feature-item">Modern &amp; Traditional</div>
+      <div class="feature-item">Affordable Solutions</div>
+      <div class="feature-item">Customer-Focused</div>
+      <div class="feature-item">Free Consultation</div>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Our Services</div>
+        <h2>Everything for your space, in-house.</h2>
+      </div>
+      <p>From a single custom piece to a complete home fit-out — designed, built, and installed by our own team.</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div><span class="num">01</span><h3>Furniture</h3><p>Custom-designed beds, sofas, dining tables and more, built for your space and requirements.</p></div>
+      <div class="tags"><span>Beds</span><span>Sofas</span><span>Dining Tables</span><span>Study Tables</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div><span class="num">02</span><h3>Cupboards &amp; Wardrobes</h3><p>Modular cupboards, sliding-door wardrobes and customized bedroom storage solutions.</p></div>
+      <div class="tags"><span>Modular</span><span>Sliding Door</span><span>Walk-in</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div><span class="num">03</span><h3>Modular Kitchen</h3><p>Functional, stylish modular kitchen designs created around your space and lifestyle.</p></div>
+      <div class="tags"><span>Cabinets</span><span>Storage</span><span>Modern Finish</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div><span class="num">04</span><h3>TV Units</h3><p>Modern, wall-mounted and storage TV units with attractive, practical designs.</p></div>
+      <div class="tags"><span>Wall-Mounted</span><span>Storage</span><span>Designer Panels</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div><span class="num">05</span><h3>False Ceiling</h3><p>Beautiful false-ceiling designs for homes, offices and commercial spaces.</p></div>
+      <div class="tags"><span>Living Room</span><span>Office</span><span>Commercial</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div><span class="num">06</span><h3>Interior Woodwork</h3><p>Wall panels, shelving, partitions, doors and decorative woodwork, customized to your needs.</p></div>
+      <div class="tags"><span>Panels</span><span>Partitions</span><span>Shelving</span></div>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2px;">
+    <div class="service-card reveal bracket" style="border:1px solid var(--line); background:var(--stone-2);">
+      <span class="bl"></span><span class="br"></span>
+      <div><span class="num">07</span><h3>Complete Home Interiors</h3><p>End-to-end interior solutions for the living room, bedroom, kitchen, dining area, pooja room and study — one team, start to finish.</p></div>
+      <div class="tags"><span>Living Room</span><span>Bedroom</span><span>Kitchen</span><span>Pooja Room</span><span>Study</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="on-tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Our Work</div>
+        <h2>Explore completed projects</h2>
+      </div>
+      <p>A look at recent interiors, furniture and woodwork across homes we've worked on.</p>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#8a9179,#57654c);"></div><div class="label"><span class="l1">Living Room</span><span class="l2">TV Units &amp; Panels</span></div></div>
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#b08d57,#8a6b3e);"></div><div class="label"><span class="l1">Bedroom</span><span class="l2">Wardrobes &amp; Storage</span></div></div>
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#4a463f,#2d2a25);"></div><div class="label"><span class="l1">Kitchen</span><span class="l2">Modular Layouts</span></div></div>
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#9c5a3c,#764431);"></div><div class="label"><span class="l1">Furniture</span><span class="l2">Beds &amp; Dining</span></div></div>
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#3c4635,#242a1e);"></div><div class="label"><span class="l1">Woodwork</span><span class="l2">Partitions &amp; Panels</span></div></div>
+    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#c9c3b6,#8a8477);"></div><div class="label"><span class="l1">False Ceiling</span><span class="l2">Home &amp; Office</span></div></div>
+  </div>
+  <div class="wrap" style="margin-top:36px; text-align:center;">
+    <a href="#gallery" class="btn">View Our Gallery →</a>
+    <p style="font-size:12.5px; color:var(--charcoal); margin-top:14px;">Project photos shown here represent our work and selected design inspirations.</p>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Customer Reviews</div>
+        <h2>Our customers' satisfaction is our priority.</h2>
+      </div>
+      <p>Real feedback from homes and offices we've worked on.</p>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Quality work and beautiful finishing."</p></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Excellent interior work and professional service."</p></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Good designs, reasonable pricing and timely completion."</p></div>
+    </div>
+    <div style="text-align:center; margin-top:34px;">
+      <a href="#" class="btn">Leave a Google Review →</a>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="justify-content:center; color:var(--brass);">Let's Talk</div>
+    <h2>Ready to transform your space?</h2>
+    <p>Let's discuss your ideas and create an interior that matches your style and budget.</p>
+    <div class="ctas">
+      <a href="tel:+919390608457" class="btn brass">Call Us</a>
+      <a href="https://wa.me/919390608457" class="btn on-dark">WhatsApp Us</a>
+      <a href="#quote" class="btn on-dark">Get a Free Quote</a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="eyebrow">About Chandu Interiors</div>
+      <h2 style="font-size:clamp(28px,3.6vw,42px); margin:16px 0 22px;">Design and craftsmanship, under one roof.</h2>
+      <p>Chandu Interiors provides customized interior, furniture, and woodwork solutions for homes and commercial spaces.</p>
+      <p>Our goal is to combine modern design, quality materials, skilled workmanship, and your requirements to create spaces that are beautiful, comfortable, and practical.</p>
+      <p>Whether you need a single customized wardrobe or complete home interiors, our team works with you from design to completion.</p>
+    </div>
+    <div class="reveal">
+      <div class="mv-block bracket">
+        <span class="bl"></span><span class="br"></span>
+        <div class="eyebrow">Our Mission</div>
+        <p>To provide high-quality interior and furniture solutions that make every space more functional, stylish, and comfortable.</p>
+      </div>
+      <div class="mv-block bracket">
+        <span class="bl"></span><span class="br"></span>
+        <div class="eyebrow">Our Vision</div>
+        <p>To become a trusted name in interior design and customized woodwork by delivering quality workmanship and excellent customer service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="on-tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">FAQ</div>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <p>Everything you need to know before you get in touch.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Do you provide customized designs?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. We provide customized designs according to your space, requirements, and preferences.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you provide home interior services?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. We provide interior solutions for living rooms, bedrooms, kitchens, and other areas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I share my own design?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. You can share your reference images or designs with us through WhatsApp.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you provide a quotation before starting the work?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Project requirements can be discussed and a quotation can be prepared before proceeding.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you take small projects?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. You can contact us with your requirements and we can discuss the project.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How can I contact Chandu Interiors?<span class="plus">+</span></button>
+        <div class="faq-a"><p>You can call us, send a WhatsApp message, or use the contact form on our website.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quote" class="on-dark">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Get in Touch</div>
+      <h2>Get your free quote</h2>
+      <p>Have an interior or furniture requirement? Tell us about your project and our team will get in touch with you.</p>
+      <div class="contact-detail"><span class="l">Phone</span><span class="v"><a href="tel:+919390608457">+91 93906 08457</a></span></div>
+      <div class="contact-detail"><span class="l">WhatsApp</span><span class="v"><a href="https://wa.me/919390608457">+91 93906 08457</a></span></div>
+      <div class="contact-detail"><span class="l">Email</span><span class="v"><a href="mailto:chanduinteriors7@gmail.com">chanduinteriors7@gmail.com</a></span></div>
+      <div class="contact-detail"><span class="l">Address</span><span class="v">Hyderabad & Visakhapatnam, Andhra Pradesh</span></div>
+      <div class="hours">
+        <div class="row"><span>Monday – Saturday</span><span>9:00 AM – 7:00 PM</span></div>
+        <div class="row"><span>Sunday</span><span>By Appointment</span></div>
+      </div>
+    </div>
+    <form id="quoteForm" class="reveal">
+      <div class="form-row">
+        <div class="field"><label for="qname">Name</label><input type="text" id="qname" name="Name" required></div>
+        <div class="field"><label for="qphone">Phone Number</label><input type="tel" id="qphone" name="Phone" required></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="qwhatsapp">WhatsApp Number</label><input type="tel" id="qwhatsapp" name="WhatsApp"></div>
+        <div class="field"><label for="qlocation">Location</label><input type="text" id="qlocation" name="Location" required></div>
+      </div>
+      <div class="field">
+        <label for="qservice">Service Required</label>
+        <select id="qservice" name="Service Required">
+          <option>Furniture</option>
+          <option>Wardrobe</option>
+          <option>Modular Kitchen</option>
+          <option>TV Unit</option>
+          <option>False Ceiling</option>
+          <option>Woodwork</option>
+          <option>Complete Home Interiors</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="qdetails">Project Details</label>
+        <textarea id="qdetails" name="Project Details" placeholder="Tell us about your requirements" required></textarea>
+      </div>
+      <div class="field">
+        <label for="qphotos">Upload Photos / Design</label>
+        <input type="file" id="qphotos" name="Photos" accept="image/*" multiple>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn brass" id="quoteSubmitBtn">Submit Request</button>
+        <span class="form-note" id="quoteFormNote">We'll contact you to discuss your requirements.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Chandu <em style="color:var(--brass); font-style:italic;">Interiors</em></div>
+        <p>Beautiful Spaces. Quality Craftsmanship. Built for You.</p>
+      </div>
+      <div class="footer-col">
+        <div class="eyebrow">Quick Links</div>
+        <a href="#top">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#quote">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="eyebrow">Contact</div>
+        <div class="line">Phone: +91 93906 08457</div>
+        <div class="line">WhatsApp: +91 93906 08457</div>
+        <div class="line">Hyderabad & Visakhapatnam, AP</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Chandu Interiors. All Rights Reserved.</span>
+      <span>Furniture · Wardrobes · Modular Kitchen · TV Units · False Ceiling · Woodwork</span>
+    </div>
+  </div>
+</footer>
+
+<div class="action-bar">
+  <div class="wrap">
+    <a href="tel:+919390608457">Call</a>
+    <a href="https://wa.me/919390608457">WhatsApp</a>
+    <a href="#quote">Free Quote</a>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const header = document.getElementById('siteHeader');
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('#mainNav a').forEach(a => {
+    a.addEventListener('click', () => { header.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---- Quote form: submits to the Flask backend at /api/quote ----
+  // Change API_BASE to your deployed backend URL, e.g. "https://api.chanduinteriors.com"
+  const API_BASE = "http://localhost:5000";
+
+  const quoteForm = document.getElementById('quoteForm');
+  const submitBtn = document.getElementById('quoteSubmitBtn');
+  const formNote = document.getElementById('quoteFormNote');
+
+  quoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(quoteForm);
+      const res = await fetch(`${API_BASE}/api/quote`, { method: 'POST', body: formData });
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        formNote.textContent = "Thanks! We'll contact you shortly.";
+        formNote.style.color = '#57654c';
+        quoteForm.reset();
+      } else {
+        formNote.textContent = data.error || 'Something went wrong. Please call or WhatsApp us instead.';
+        formNote.style.color = '#9c5a3c';
+      }
+    } catch (err) {
+      formNote.textContent = 'Could not reach the server. Please call or WhatsApp us instead.';
+      formNote.style.color = '#9c5a3c';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Request';
+    }
+  });
+</script>
+
+</body>
+</html>
