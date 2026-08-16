@@ -1,13 +1,15 @@
+import base64
+import json
 import os
-import smtplib
 import threading
+import urllib.error
 import urllib.parse
 import urllib.request
-import urllib.error
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
+# ============================================================
+# LEAD SUMMARY
+# ============================================================
 
 def _lead_summary(lead):
     return (
@@ -25,68 +27,270 @@ def _lead_summary(lead):
 
 
 # ============================================================
-# EMAIL NOTIFICATION
+# FIND UPLOADED PHOTO
+# ============================================================
+
+def _find_photo_file(app, lead):
+    """
+    Find the actual uploaded photo belonging to this lead.
+    """
+
+    if not lead.photos:
+        return None
+
+    upload_folder = app.config.get("UPLOAD_FOLDER")
+
+    if not upload_folder:
+        return None
+
+    filenames = [
+        os.path.basename(item.strip())
+        for item in str(lead.photos).split(",")
+        if item.strip()
+    ]
+
+    if not filenames:
+        return None
+
+    # First: exact path
+    for filename in filenames:
+        photo_path = os.path.join(
+            upload_folder,
+            filename
+        )
+
+        if os.path.isfile(photo_path):
+            app.logger.info(
+                "Found uploaded file for lead %s: %s",
+                lead.id,
+                photo_path
+            )
+            return photo_path
+
+    # Fallback: search uploads folder
+    try:
+        for root, dirs, files in os.walk(upload_folder):
+
+            for filename in filenames:
+
+                if filename in files:
+
+                    photo_path = os.path.join(
+                        root,
+                        filename
+                    )
+
+                    app.logger.info(
+                        "Found uploaded file through search "
+                        "for lead %s: %s",
+                        lead.id,
+                        photo_path
+                    )
+
+                    return photo_path
+
+    except Exception as exc:
+        app.logger.error(
+            "Error searching upload folder for lead %s: %s",
+            lead.id,
+            exc
+        )
+
+    app.logger.warning(
+        "Uploaded file not found for lead %s. Stored photos: %s",
+        lead.id,
+        lead.photos
+    )
+
+    return None
+
+
+# ============================================================
+# RESEND EMAIL
 # ============================================================
 
 def send_email_notification(app, lead_id):
-    """Send lead notification by email in a background thread."""
+    """
+    Send lead notification through Resend HTTPS API.
+
+    This avoids Render Free's SMTP port restrictions.
+    """
 
     with app.app_context():
+
         from models import db, Lead
 
-        lead = db.session.get(Lead, lead_id)
+        lead = db.session.get(
+            Lead,
+            lead_id
+        )
 
         if lead is None:
             return
 
         cfg = app.config
 
-        if not cfg.get("SMTP_USER") or not cfg.get("NOTIFY_EMAIL"):
+        resend_api_key = os.environ.get(
+            "RESEND_API_KEY",
+            ""
+        ).strip()
+
+        notify_email = os.environ.get(
+            "NOTIFY_EMAIL",
+            ""
+        ).strip()
+
+        resend_from = os.environ.get(
+            "RESEND_FROM_EMAIL",
+            ""
+        ).strip()
+
+        if not resend_api_key:
             app.logger.info(
-                "Email not configured "
-                "(SMTP_USER / NOTIFY_EMAIL) — skipping."
+                "Email not configured: RESEND_API_KEY missing — skipping."
+            )
+            return
+
+        if not notify_email:
+            app.logger.info(
+                "Email not configured: NOTIFY_EMAIL missing — skipping."
+            )
+            return
+
+        if not resend_from:
+            app.logger.info(
+                "Email not configured: RESEND_FROM_EMAIL missing — skipping."
             )
             return
 
         try:
-            msg = MIMEMultipart()
 
-            msg["From"] = cfg["SMTP_USER"]
-            msg["To"] = cfg["NOTIFY_EMAIL"]
-
-            msg["Subject"] = (
-                f"New Quote Request — {lead.name} "
-                f"({lead.service or 'General'})"
+            photo_path = _find_photo_file(
+                app,
+                lead
             )
 
-            msg.attach(
-                MIMEText(
-                    _lead_summary(lead),
-                    "plain"
-                )
+            email_text = _lead_summary(
+                lead
             )
 
-            with smtplib.SMTP(
-                cfg["SMTP_HOST"],
-                cfg["SMTP_PORT"],
-                timeout=15
-            ) as server:
+            # ------------------------------------------------
+            # Build email payload
+            # ------------------------------------------------
 
-                server.starttls()
+            payload = {
+                "from": resend_from,
+                "to": [notify_email],
+                "subject": (
+                    f"New Quote Request — "
+                    f"{lead.name} "
+                    f"({lead.service or 'General'})"
+                ),
+                "text": email_text
+            }
 
-                server.login(
-                    cfg["SMTP_USER"],
-                    cfg["SMTP_PASSWORD"]
+            # ------------------------------------------------
+            # Attach uploaded photo if available
+            # ------------------------------------------------
+
+            if photo_path and os.path.isfile(photo_path):
+
+                try:
+
+                    with open(
+                        photo_path,
+                        "rb"
+                    ) as file:
+
+                        file_data = file.read()
+
+                    encoded_file = base64.b64encode(
+                        file_data
+                    ).decode("utf-8")
+
+                    filename = os.path.basename(
+                        photo_path
+                    )
+
+                    payload["attachments"] = [
+                        {
+                            "filename": filename,
+                            "content": encoded_file
+                        }
+                    ]
+
+                    app.logger.info(
+                        "Attaching photo to email for lead %s: %s",
+                        lead_id,
+                        filename
+                    )
+
+                except Exception as exc:
+
+                    app.logger.error(
+                        "Could not attach photo for lead %s: %s",
+                        lead_id,
+                        exc
+                    )
+
+            # ------------------------------------------------
+            # Send through Resend HTTPS API
+            # ------------------------------------------------
+
+            url = "https://api.resend.com/emails"
+
+            data = json.dumps(
+                payload
+            ).encode("utf-8")
+
+            request = urllib.request.Request(
+                url,
+                data=data,
+                method="POST",
+                headers={
+                    "Authorization": (
+                        f"Bearer {resend_api_key}"
+                    ),
+                    "Content-Type": "application/json"
+                }
+            )
+
+            with urllib.request.urlopen(
+                request,
+                timeout=30
+            ) as response:
+
+                response_body = response.read().decode(
+                    "utf-8",
+                    errors="replace"
                 )
 
-                server.send_message(msg)
+            app.logger.info(
+                "Email notification sent successfully "
+                "for lead %s: %s",
+                lead_id,
+                response_body
+            )
 
             lead.email_sent = True
             db.session.commit()
 
-            app.logger.info(
-                "Email notification sent successfully for lead %s",
-                lead_id
+        except urllib.error.HTTPError as exc:
+
+            try:
+                error_body = exc.read().decode(
+                    "utf-8",
+                    errors="replace"
+                )
+            except Exception:
+                error_body = "Unable to read email API error."
+
+            app.logger.error(
+                "Email notification failed for lead %s: "
+                "HTTP %s - %s",
+                lead_id,
+                exc.code,
+                error_body
             )
 
         except Exception as exc:
@@ -99,26 +303,46 @@ def send_email_notification(app, lead_id):
 
 
 # ============================================================
-# WHATSAPP NOTIFICATION
+# WHATSAPP / TWILIO
 # ============================================================
 
 def send_whatsapp_notification(app, lead_id):
-    """Send lead notification through Twilio WhatsApp."""
+    """
+    Send lead notification through Twilio WhatsApp.
+
+    Note:
+    Twilio trial accounts may reject WhatsApp messages.
+    """
 
     with app.app_context():
+
         from models import db, Lead
 
-        lead = db.session.get(Lead, lead_id)
+        lead = db.session.get(
+            Lead,
+            lead_id
+        )
 
         if lead is None:
             return
 
         cfg = app.config
 
-        sid = cfg.get("TWILIO_ACCOUNT_SID")
-        token = cfg.get("TWILIO_AUTH_TOKEN")
-        from_num = cfg.get("TWILIO_WHATSAPP_FROM")
-        to_num = cfg.get("NOTIFY_WHATSAPP_TO")
+        sid = cfg.get(
+            "TWILIO_ACCOUNT_SID"
+        )
+
+        token = cfg.get(
+            "TWILIO_AUTH_TOKEN"
+        )
+
+        from_num = cfg.get(
+            "TWILIO_WHATSAPP_FROM"
+        )
+
+        to_num = cfg.get(
+            "NOTIFY_WHATSAPP_TO"
+        )
 
         if not all([
             sid,
@@ -126,13 +350,16 @@ def send_whatsapp_notification(app, lead_id):
             from_num,
             to_num
         ]):
+
             app.logger.info(
                 "WhatsApp not configured "
                 "(Twilio env vars) — skipping."
             )
+
             return
 
         try:
+
             from twilio.rest import Client
 
             client = Client(
@@ -165,109 +392,6 @@ def send_whatsapp_notification(app, lead_id):
 
 
 # ============================================================
-# FIND UPLOADED PHOTO
-# ============================================================
-
-def _find_photo_file(app, lead):
-    """
-    Find the actual uploaded photo file for this lead.
-    """
-
-    if not lead.photos:
-        return None
-
-    upload_folder = app.config.get(
-        "UPLOAD_FOLDER"
-    )
-
-    if not upload_folder:
-        return None
-
-    # Lead.photos can contain multiple filenames.
-    # Example:
-    # photo1.jpg,photo2.jpg
-    filenames = [
-        os.path.basename(
-            item.strip()
-        )
-        for item in str(
-            lead.photos
-        ).split(",")
-        if item.strip()
-    ]
-
-    if not filenames:
-        return None
-
-    # --------------------------------------------------------
-    # First try the exact expected location
-    # --------------------------------------------------------
-
-    for filename in filenames:
-
-        photo_path = os.path.join(
-            upload_folder,
-            filename
-        )
-
-        if os.path.isfile(photo_path):
-
-            app.logger.info(
-                "Found uploaded photo for lead %s: %s",
-                lead.id,
-                photo_path
-            )
-
-            return photo_path
-
-    # --------------------------------------------------------
-    # Fallback: search inside uploads directory
-    # --------------------------------------------------------
-
-    try:
-
-        for root, dirs, files in os.walk(
-            upload_folder
-        ):
-
-            for filename in filenames:
-
-                if filename in files:
-
-                    photo_path = os.path.join(
-                        root,
-                        filename
-                    )
-
-                    app.logger.info(
-                        "Found uploaded photo through "
-                        "fallback search for lead %s: %s",
-                        lead.id,
-                        photo_path
-                    )
-
-                    return photo_path
-
-    except Exception as exc:
-
-        app.logger.error(
-            "Error searching for uploaded photo "
-            "for lead %s: %s",
-            lead.id,
-            exc
-        )
-
-    app.logger.warning(
-        "Uploaded photo file NOT found for lead %s. "
-        "Stored value: %s",
-        lead.id,
-        lead.photos
-    )
-
-    return None
-
-
-# ============================================================
 # TELEGRAM HTTP REQUEST
 # ============================================================
 
@@ -293,7 +417,7 @@ def _telegram_request(
     )
 
     # --------------------------------------------------------
-    # Normal POST request
+    # Normal request
     # --------------------------------------------------------
 
     if not file_path:
@@ -416,16 +540,7 @@ def send_telegram_notification(
     lead_id
 ):
     """
-    Send lead details to Telegram.
-
-    First:
-        Send complete lead information.
-
-    Then:
-        Find uploaded image.
-
-    Finally:
-        Send actual image to Telegram.
+    Send lead details and uploaded photo to Telegram.
     """
 
     with app.app_context():
@@ -462,9 +577,9 @@ def send_telegram_notification(
 
         try:
 
-            # =================================================
-            # 1. SEND TEXT
-            # =================================================
+            # ------------------------------------------------
+            # 1. Lead text
+            # ------------------------------------------------
 
             message = _lead_summary(
                 lead
@@ -480,15 +595,15 @@ def send_telegram_notification(
             )
 
             app.logger.info(
-                "Telegram text notification "
-                "sent for lead %s: %s",
+                "Telegram text notification sent "
+                "for lead %s: %s",
                 lead_id,
                 result
             )
 
-            # =================================================
-            # 2. FIND PHOTO
-            # =================================================
+            # ------------------------------------------------
+            # 2. Find uploaded photo
+            # ------------------------------------------------
 
             photo_path = _find_photo_file(
                 app,
@@ -498,29 +613,16 @@ def send_telegram_notification(
             if not photo_path:
 
                 app.logger.warning(
-                    "No actual uploaded photo found "
+                    "No uploaded photo found "
                     "for lead %s",
                     lead_id
                 )
 
                 return
 
-            # =================================================
-            # 3. CHECK FILE
-            # =================================================
-
-            if not os.path.isfile(
-                photo_path
-            ):
-
-                app.logger.warning(
-                    "Photo path does not exist "
-                    "for lead %s: %s",
-                    lead_id,
-                    photo_path
-                )
-
-                return
+            # ------------------------------------------------
+            # 3. Send photo/document
+            # ------------------------------------------------
 
             filename = os.path.basename(
                 photo_path
@@ -529,10 +631,6 @@ def send_telegram_notification(
             extension = os.path.splitext(
                 filename
             )[1].lower()
-
-            # =================================================
-            # 4. SEND IMAGE
-            # =================================================
 
             image_extensions = {
                 ".jpg",
@@ -566,10 +664,6 @@ def send_telegram_notification(
                     result
                 )
 
-            # =================================================
-            # 5. SEND OTHER FILE TYPES
-            # =================================================
-
             else:
 
                 result = _telegram_request(
@@ -599,12 +693,9 @@ def send_telegram_notification(
 
             try:
 
-                error_body = (
-                    exc.read()
-                    .decode(
-                        "utf-8",
-                        errors="replace"
-                    )
+                error_body = exc.read().decode(
+                    "utf-8",
+                    errors="replace"
                 )
 
             except Exception:
@@ -632,7 +723,7 @@ def send_telegram_notification(
 
 
 # ============================================================
-# ALL NOTIFICATIONS
+# NOTIFY NEW LEAD
 # ============================================================
 
 def notify_new_lead(
@@ -642,35 +733,23 @@ def notify_new_lead(
     """
     Send Email, WhatsApp and Telegram
     notifications in background threads.
-
-    Customer form does not need to wait
-    for notifications to finish.
     """
 
-    # --------------------------------------------------------
     # Email
-    # --------------------------------------------------------
-
     threading.Thread(
         target=send_email_notification,
         args=(app, lead_id),
         daemon=True
     ).start()
 
-    # --------------------------------------------------------
     # WhatsApp
-    # --------------------------------------------------------
-
     threading.Thread(
         target=send_whatsapp_notification,
         args=(app, lead_id),
         daemon=True
     ).start()
 
-    # --------------------------------------------------------
     # Telegram
-    # --------------------------------------------------------
-
     threading.Thread(
         target=send_telegram_notification,
         args=(app, lead_id),
