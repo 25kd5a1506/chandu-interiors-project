@@ -92,6 +92,10 @@ class Config:
     # WhatsApp notifications - Twilio
     # =========================================================
 
+    # Telegram notifications
+    TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
     TWILIO_ACCOUNT_SID = os.environ.get(
         "TWILIO_ACCOUNT_SID",
         ""
