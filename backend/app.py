@@ -3,7 +3,7 @@ from functools import wraps
 
 from flask import (
     Flask, request, jsonify, render_template, redirect,
-    url_for, session, send_from_directory, flash
+    url_for, session, send_from_directory, send_file, flash
 )
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -25,6 +25,14 @@ with app.app_context():
 
 
 # ---------------------------------------------------------------- helpers --
+
+@app.route("/")
+def index():
+    frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "index.html"))
+    if os.path.exists(frontend_path):
+        return send_file(frontend_path)
+    return jsonify({"ok": True, "service": "chandu-interiors-backend", "message": "Backend is running. Frontend file not found."})
+
 
 def allowed_file(filename):
     return (
@@ -90,6 +98,53 @@ def submit_quote():
 @login_required
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
+
+@app.route("/api/contact", methods=["POST", "OPTIONS"])
+def submit_contact():
+    if request.method == "OPTIONS":
+        return "", 204
+
+    data = request.get_json(silent=True) or {}
+
+    name = (data.get("name") or data.get("Name") or "").strip()
+    phone = (data.get("phone") or data.get("Phone") or "").strip()
+    email = (data.get("email") or data.get("Email") or "").strip()
+    project_type = (
+        data.get("projectType")
+        or data.get("project_type")
+        or data.get("Project Type")
+        or ""
+    ).strip()
+    message = (
+        data.get("message")
+        or data.get("Message")
+        or ""
+    ).strip()
+
+    if not name or not phone or not project_type:
+        return jsonify({
+            "ok": False,
+            "error": "Name, phone number and project type are required."
+        }), 400
+
+    lead = Lead(
+        name=name,
+        phone=phone,
+        service=project_type,
+        details=message,
+    )
+
+    db.session.add(lead)
+    db.session.commit()
+
+    notify_new_lead(app, lead.id)
+
+    return jsonify({
+        "ok": True,
+        "message": "Thanks! We'll contact you shortly.",
+        "lead_id": lead.id
+    }), 201
+
 
 
 # -------------------------------------------------------------- admin auth --

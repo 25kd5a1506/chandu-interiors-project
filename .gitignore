@@ -15,3 +15,7 @@ backend/static/uploads/*
 # OS / editor
 .DS_Store
 .vscode/*.log
+.venv312/
+instance/
+client/
+server/

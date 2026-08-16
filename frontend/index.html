@@ -1,654 +1,3317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chandu Interiors | Interior Design, Furniture &amp; Woodwork</title>
-<meta name="description" content="Chandu Interiors offers customized furniture, wardrobes, modular kitchens, TV units, false ceilings, woodwork and complete interior solutions. Contact us for a free quote.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1d1b18;
-    --stone:#ece6dc;
-    --stone-2:#e2dacb;
-    --charcoal:#4a463f;
-    --sage:#57654c;
-    --sage-dark:#3c4635;
-    --brass:#b08d57;
-    --clay:#9c5a3c;
-    --line: rgba(29,27,24,0.14);
-    --line-light: rgba(236,230,220,0.18);
-    --max:1180px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--stone);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    font-weight:400;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
-  }
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-  h1,h2,h3{font-family:'Instrument Serif', serif; font-weight:400; letter-spacing:-0.01em;}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
-  ::selection{background:var(--sage); color:var(--stone);}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--sage-dark);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{content:''; width:20px; height:1px; background:var(--brass); display:inline-block;}
-  .on-dark .eyebrow{color:var(--brass);}
-  .on-dark .eyebrow::before{background:var(--brass);}
+  <title>Chandu Interior Designs | Premium Interior Solutions</title>
 
-  /* corner-bracket motif (signature element) — architectural crop marks */
-  .bracket{position:relative;}
-  .bracket::before, .bracket::after,
-  .bracket .bl, .bracket .br{
-    content:''; position:absolute; width:16px; height:16px; pointer-events:none;
-  }
-  .bracket::before{ top:-1px; left:-1px; border-top:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
-  .bracket::after{ top:-1px; right:-1px; border-top:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
-  .bracket .bl{ bottom:-1px; left:-1px; border-bottom:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
-  .bracket .br{ bottom:-1px; right:-1px; border-bottom:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
+  <meta name="description"
+        content="Chandu Interior Designs provides premium modular kitchens, wardrobes, living rooms, bedrooms, false ceilings, furniture and complete home interiors.">
 
-  /* ---------- sticky action bar (mobile) ---------- */
-  .action-bar{
-    position:fixed; bottom:0; left:0; right:0; z-index:60;
-    display:none;
-    background:var(--ink);
-    border-top:1px solid var(--line-light);
-  }
-  .action-bar .wrap{padding:0 12px; display:flex;}
-  .action-bar a{
-    flex:1; text-align:center; padding:14px 8px;
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.05em; text-transform:uppercase;
-    color:var(--stone); border-right:1px solid var(--line-light);
-  }
-  .action-bar a:last-child{border-right:none; color:var(--ink); background:var(--brass);}
+  <meta name="theme-color" content="#0b0b0b">
 
-  /* ---------- header ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background:rgba(236,230,220,0.9);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  header .wrap{display:flex; align-items:center; justify-content:space-between; height:78px;}
-  .logo{font-family:'Instrument Serif', serif; font-size:23px; letter-spacing:0.01em;}
-  .logo em{font-style:italic; color:var(--sage-dark);}
-  nav{display:flex; align-items:center; gap:32px;}
-  nav a.navlink{font-size:14px; color:var(--charcoal); transition:color .2s ease;}
-  nav a.navlink:hover{color:var(--sage-dark);}
-  nav a.navlink:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:2px;}
-  .btn{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
-    padding:12px 20px; border:1px solid var(--sage-dark); color:var(--sage-dark); background:transparent;
-    cursor:pointer; transition:background .2s ease, color .2s ease; display:inline-block; white-space:nowrap;
-  }
-  .btn:hover{background:var(--sage-dark); color:var(--stone);}
-  .btn.solid{background:var(--sage-dark); color:var(--stone); border-color:var(--sage-dark);}
-  .btn.solid:hover{background:var(--ink);}
-  .btn.brass{background:var(--brass); color:var(--ink); border-color:var(--brass);}
-  .btn.brass:hover{background:#c49f68;}
-  .btn.on-dark{border-color:var(--brass); color:var(--brass);}
-  .btn.on-dark:hover{background:var(--brass); color:var(--ink);}
-  .mobile-toggle{display:none;}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative; padding:186px 0 110px; overflow:hidden;
-    background:
-      radial-gradient(ellipse at 85% 0%, rgba(176,141,87,0.14), transparent 55%),
-      var(--stone);
-  }
-  .blueprint-lines{
-    position:absolute; inset:0; opacity:0.5; pointer-events:none;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:64px 64px;
-    mask-image:linear-gradient(to bottom, black, transparent 75%);
-  }
-  .hero .inner{position:relative; z-index:2; max-width:740px;}
-  .hero h1{font-size:clamp(38px, 6vw, 70px); line-height:1.05; margin:20px 0 24px;}
-  .hero h1 em{font-style:italic; color:var(--sage-dark);}
-  .hero p.lede{font-size:18px; color:var(--charcoal); max-width:520px; margin-bottom:38px;}
-  .hero .ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 
-  /* ---------- feature strip ---------- */
-  .features{background:var(--ink); color:var(--stone); padding:0;}
-  .feature-grid{
-    display:grid; grid-template-columns:repeat(4, 1fr);
-    border-top:1px solid var(--line-light);
-  }
-  .feature-item{
-    padding:30px 26px; border-right:1px solid var(--line-light); border-bottom:1px solid var(--line-light);
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.03em;
-    display:flex; align-items:center; gap:10px;
-  }
-  .feature-item::before{content:'—'; color:var(--brass);}
-  .feature-item:nth-child(4n){border-right:none;}
+  <style>
+    /* =========================================================
+       CHANDU INTERIOR DESIGNS
+       PREMIUM BLACK + GOLD DESIGN
+       ========================================================= */
 
-  /* ---------- section shell ---------- */
-  section{padding:104px 0;}
-  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:52px; flex-wrap:wrap;}
-  .section-head h2{font-size:clamp(30px, 4vw, 46px);}
-  .section-head p{max-width:380px; color:var(--charcoal); font-size:15px;}
-  section.on-dark{background:var(--ink); color:var(--stone);}
-  section.on-dark .section-head p{color:#b9b3a6;}
-  section.on-tint{background:var(--stone-2);}
-
-  /* ---------- services ---------- */
-  .services-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line);}
-  .service-card{
-    background:var(--stone); padding:36px 30px; min-height:250px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    transition:background .2s ease;
-  }
-  .service-card:hover{background:var(--stone-2);}
-  .service-card .num{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--brass);}
-  .service-card h3{font-size:26px; margin:18px 0 10px;}
-  .service-card p{font-size:14.5px; color:var(--charcoal); margin-bottom:16px;}
-  .service-card .tags{display:flex; flex-wrap:wrap; gap:6px;}
-  .service-card .tags span{
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase;
-    border:1px solid var(--line); padding:5px 9px; color:var(--sage-dark);
-  }
-
-  /* ---------- gallery ---------- */
-  .gallery-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:2px;}
-  .gallery-tile{
-    position:relative; aspect-ratio:4/3; overflow:hidden;
-    display:flex; align-items:flex-end; padding:22px;
-  }
-  .gallery-tile .tone{position:absolute; inset:0;}
-  .gallery-tile::after{content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(29,27,24,0.75), transparent 60%);}
-  .gallery-tile .label{position:relative; z-index:2; color:var(--stone);}
-  .gallery-tile .label .l1{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--brass); display:block; margin-bottom:4px;}
-  .gallery-tile .label .l2{font-family:'Instrument Serif', serif; font-size:24px;}
-
-  /* ---------- reviews ---------- */
-  .reviews-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
-  .review-card{
-    border:1px solid var(--line); padding:30px; background:var(--stone);
-    position:relative;
-  }
-  .review-card .stars{color:var(--brass); font-size:15px; letter-spacing:2px; margin-bottom:16px;}
-  .review-card p{font-size:16.5px; font-style:italic; font-family:'Instrument Serif', serif; line-height:1.4;}
-
-  /* ---------- about / mission-vision ---------- */
-  .about-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:70px; align-items:start;}
-  .about-grid p{color:var(--charcoal); font-size:16.5px; margin-bottom:18px; max-width:520px;}
-  .mv-block{border:1px solid var(--line); padding:30px; margin-bottom:20px;}
-  .mv-block .eyebrow{margin-bottom:12px;}
-  .mv-block p{font-size:15px; color:var(--charcoal); max-width:none;}
-
-  /* ---------- CTA band ---------- */
-  .cta-band{
-    background:var(--sage-dark); color:var(--stone); padding:90px 0; text-align:center;
-    position:relative; overflow:hidden;
-  }
-  .cta-band h2{font-size:clamp(32px, 5vw, 54px); margin-bottom:18px;}
-  .cta-band p{font-size:17px; color:#d8dccf; max-width:520px; margin:0 auto 36px;}
-  .cta-band .ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
-
-  /* ---------- FAQ ---------- */
-  .faq-list{border-top:1px solid var(--line);}
-  .faq-item{border-bottom:1px solid var(--line);}
-  .faq-q{
-    width:100%; text-align:left; background:none; border:none; cursor:pointer;
-    padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:20px;
-    font-family:'Instrument Serif', serif; font-size:21px; color:var(--ink);
-  }
-  .faq-q .plus{font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--brass); transition:transform .25s ease; flex-shrink:0;}
-  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
-  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
-  .faq-a p{padding:0 0 24px; color:var(--charcoal); font-size:15.5px; max-width:640px;}
-
-  /* ---------- contact / quote ---------- */
-  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px;}
-  .contact-info h2{font-size:clamp(30px,4vw,44px); margin-bottom:18px;}
-  .contact-info p{color:var(--charcoal); font-size:16px; margin-bottom:30px; max-width:420px;}
-  .contact-detail{margin-bottom:18px;}
-  .contact-detail .l{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:4px; display:block;}
-  .contact-detail .v{font-size:16.5px;}
-  .hours{margin-top:26px; border-top:1px solid var(--line); padding-top:20px;}
-  .hours .row{display:flex; justify-content:space-between; font-size:14px; color:var(--charcoal); padding:5px 0;}
-
-  form{display:flex; flex-direction:column; gap:18px;}
-  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
-  .field{display:flex; flex-direction:column; gap:7px;}
-  .field label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal);}
-  .field input, .field select, .field textarea{
-    background:var(--stone); border:none; border-bottom:1px solid var(--line);
-    color:var(--ink); font-family:'Inter', sans-serif; font-size:15.5px; padding:10px 2px;
-    transition:border-color .2s ease;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-bottom-color:var(--brass);}
-  .field textarea{resize:vertical; min-height:90px;}
-  form .submit-row{margin-top:6px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
-  .form-note{font-size:12.5px; color:var(--charcoal); opacity:0.8;}
-
-  /* ---------- footer ---------- */
-  footer{background:var(--ink); color:var(--stone); padding:64px 0 30px;}
-  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px; margin-bottom:46px;}
-  .footer-logo{font-family:'Instrument Serif', serif; font-size:24px; margin-bottom:12px;}
-  .footer-grid p{color:#b9b3a6; font-size:14px; max-width:280px;}
-  .footer-col .eyebrow{color:var(--brass); margin-bottom:16px;}
-  .footer-col a, .footer-col div.line{display:block; font-size:14px; color:#c9c3b6; margin-bottom:11px;}
-  .footer-col a:hover{color:var(--brass);}
-  .footer-bottom{border-top:1px solid var(--line-light); padding-top:24px; display:flex; justify-content:space-between; font-size:12.5px; color:#8a8477; flex-wrap:wrap; gap:10px;}
-
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
-
-  @media (max-width: 880px){
-    nav{display:none;}
-    .mobile-toggle{display:flex; background:none; border:none; color:var(--ink); cursor:pointer; flex-direction:column; gap:5px; padding:6px;}
-    .mobile-toggle span{width:22px; height:2px; background:var(--sage-dark); display:block;}
-    header.open nav{
-      display:flex; position:absolute; top:78px; left:0; right:0; background:var(--stone);
-      flex-direction:column; padding:22px 32px; gap:18px; border-bottom:1px solid var(--line);
+    :root {
+      --black: #080808;
+      --black-2: #0e0e0e;
+      --black-3: #141414;
+      --card: #111111;
+      --gold: #c99b45;
+      --gold-light: #e3bc6a;
+      --gold-dark: #8c6728;
+      --white: #ffffff;
+      --text: #e9e9e9;
+      --muted: #a4a4a4;
+      --border: rgba(201,155,69,0.22);
+      --border-light: rgba(255,255,255,0.09);
+      --container: 1180px;
     }
-    .feature-grid{grid-template-columns:repeat(2,1fr);}
-    .feature-item:nth-child(4n){border-right:1px solid var(--line-light);}
-    .feature-item:nth-child(2n){border-right:none;}
-    .services-grid, .gallery-grid, .reviews-grid{grid-template-columns:1fr;}
-    .about-grid, .contact-grid{grid-template-columns:1fr; gap:44px;}
-    .form-row{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr; gap:32px;}
-    .action-bar{display:block;}
-    body{padding-bottom:52px;}
-  }
-</style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .container {
+      width: min(92%, var(--container));
+      margin: auto;
+    }
+
+    /* =========================================================
+       SCROLLBAR
+       ========================================================= */
+
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080808;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold-dark);
+    }
+
+    /* =========================================================
+       TOP HEADER
+       ========================================================= */
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(6, 6, 6, 0.94);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(201,155,69,0.28);
+      transition: 0.3s ease;
+    }
+
+    .header.scrolled {
+      background: rgba(5, 5, 5, 0.98);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    /* =========================================================
+       LOGO
+       ========================================================= */
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 190px;
+    }
+
+    .logo-mark {
+      width: 39px;
+      height: 39px;
+      border: 1px solid var(--gold);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mark::before {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      border-left: 2px solid var(--gold);
+      border-top: 2px solid var(--gold);
+      transform: rotate(45deg);
+      top: 9px;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-left: 1px solid var(--gold);
+      border-top: 1px solid var(--gold);
+      transform: rotate(45deg);
+      top: 13px;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--gold-light);
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 8px;
+      letter-spacing: 0.23em;
+      color: #ddd;
+      margin-top: 3px;
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: #ddd;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 30px 0;
+      transition: 0.25s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-light);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .quote-nav {
+      border: 1px solid var(--gold-dark);
+      padding: 11px 18px !important;
+      color: var(--gold-light) !important;
+    }
+
+    .quote-nav::after {
+      display: none;
+    }
+
+    .quote-nav:hover {
+      background: var(--gold);
+      color: #000 !important;
+    }
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: var(--gold);
+      transition: 0.3s;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      min-height: 680px;
+      margin-top: 76px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.88) 0%,
+          rgba(0,0,0,0.65) 40%,
+          rgba(0,0,0,0.20) 75%,
+          rgba(0,0,0,0.38) 100%
+        ),
+        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90")
+        center/cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0.25),
+          transparent 45%,
+          rgba(0,0,0,0.65)
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(92%, var(--container));
+      margin: auto;
+      padding: 90px 0;
+    }
+
+    .hero-label {
+      color: var(--gold-light);
+      font-size: 13px;
+      letter-spacing: 0.17em;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.03;
+      max-width: 680px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero-description {
+      max-width: 520px;
+      margin-top: 23px;
+      color: #ddd;
+      font-size: 15px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #090909;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: rgba(0,0,0,0.25);
+      color: white;
+      border-color: rgba(255,255,255,0.65);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+    }
+
+    /* =========================================================
+       HERO STATS
+       ========================================================= */
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 55px;
+      max-width: 680px;
+      border-top: 1px solid rgba(255,255,255,0.22);
+      padding-top: 22px;
+    }
+
+    .stat {
+      min-width: 150px;
+      padding-right: 30px;
+      margin-right: 30px;
+      border-right: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold-light);
+      font-size: 22px;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .stat span {
+      color: #aaa;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* =========================================================
+       SECTION COMMON
+       ========================================================= */
+
+    .section {
+      padding: 85px 0;
+      background: var(--black);
+    }
+
+    .section-dark {
+      background: #0d0d0d;
+    }
+
+    .section-heading {
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .section-description {
+      max-width: 560px;
+      color: var(--muted);
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .gold-line {
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 14px;
+    }
+
+    /* =========================================================
+       SERVICES
+       ========================================================= */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    .service-card {
+      min-height: 205px;
+      background: linear-gradient(145deg, #141414, #0d0d0d);
+      border: 1px solid var(--border-light);
+      padding: 20px 13px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: 0.35s;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: 0.35s;
+    }
+
+    .service-card:hover {
+      border-color: var(--border);
+      transform: translateY(-6px);
+      background: #171717;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto 15px;
+      border: 1px solid rgba(201,155,69,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+    }
+
+    .service-icon svg {
+      width: 29px;
+      height: 29px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.3;
+    }
+
+    .service-card h3 {
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      letter-spacing: 0.04em;
+    }
+
+    .service-card p {
+      font-size: 10px;
+      line-height: 1.45;
+      color: #999;
+    }
+
+    /* =========================================================
+       PROJECT FILTER
+       ========================================================= */
+
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+
+    .filter-btn {
+      border: 1px solid #333;
+      background: transparent;
+      color: #aaa;
+      padding: 8px 17px;
+      font-size: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+    }
+
+    /* =========================================================
+       PROJECT GRID
+       ========================================================= */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .project {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #151515;
+    }
+
+    .project.large {
+      grid-column: span 2;
+    }
+
+    .project img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .project:hover img {
+      transform: scale(1.08);
+    }
+
+    .project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.82),
+        transparent 58%
+      );
+    }
+
+    .project-info {
+      position: absolute;
+      left: 18px;
+      bottom: 15px;
+      z-index: 2;
+    }
+
+    .project-info span {
+      color: var(--gold-light);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .project-info h3 {
+      margin-top: 2px;
+      font-size: 17px;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .project.hide {
+      display: none;
+    }
+
+    /* =========================================================
+       ABOUT
+       ========================================================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      min-height: 470px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 470px;
+      object-fit: cover;
+    }
+
+    .about-image::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--gold-dark);
+      left: 13px;
+      top: 13px;
+      z-index: 0;
+    }
+
+    .about-image img {
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-badge {
+      position: absolute;
+      z-index: 3;
+      bottom: 25px;
+      left: 25px;
+      background: rgba(8,8,8,0.93);
+      border-left: 3px solid var(--gold);
+      padding: 15px 20px;
+    }
+
+    .about-badge strong {
+      display: block;
+      font-size: 23px;
+      color: var(--gold-light);
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .about-badge span {
+      color: #bbb;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 18px;
+    }
+
+    .signature {
+      color: var(--gold-light);
+      font-family: cursive;
+      font-size: 29px;
+      margin-top: 22px;
+      transform: rotate(-5deg);
+      display: inline-block;
+    }
+
+    .signature-label {
+      display: block;
+      font-size: 9px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* =========================================================
+       WHY CHOOSE US
+       ========================================================= */
+
+    .why-section {
+      background: #0a0a0a;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 40px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 15px;
+      padding: 16px 0;
+      border-bottom: 1px solid #242424;
+    }
+
+    .why-icon {
+      flex: 0 0 43px;
+      height: 43px;
+      border: 1px solid rgba(201,155,69,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+    }
+
+    .why-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .why-item h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .why-item p {
+      color: #888;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    /* =========================================================
+       REVIEWS
+       ========================================================= */
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .review-card {
+      background: #111;
+      border: 1px solid #262626;
+      padding: 28px;
+      position: relative;
+    }
+
+    .review-card::before {
+      content: "“";
+      position: absolute;
+      right: 20px;
+      top: 5px;
+      color: var(--gold-dark);
+      font-size: 55px;
+      font-family: Georgia, serif;
+    }
+
+    .stars {
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .review-card p {
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.7;
+      min-height: 80px;
+    }
+
+    .review-author {
+      border-top: 1px solid #292929;
+      margin-top: 18px;
+      padding-top: 13px;
+      color: #888;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       CTA
+       ========================================================= */
+
+    .cta {
+      position: relative;
+      padding: 65px 0;
+      background:
+        linear-gradient(
+          rgba(0,0,0,0.74),
+          rgba(0,0,0,0.82)
+        ),
+        url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85")
+        center/cover fixed;
+      border-top: 1px solid var(--gold-dark);
+      border-bottom: 1px solid var(--gold-dark);
+    }
+
+    .cta-content {
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(24px, 4vw, 36px);
+      text-transform: uppercase;
+    }
+
+    .cta p {
+      color: #ccc;
+      margin: 10px auto 25px;
+      font-size: 13px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* =========================================================
+       FAQ
+       ========================================================= */
+
+    .faq-list {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #292929;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: 0;
+      color: white;
+      padding: 20px 0;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .faq-plus {
+      color: var(--gold-light);
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .faq-item.open .faq-plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .faq-answer p {
+      color: #999;
+      font-size: 13px;
+      padding: 0 0 20px;
+    }
+
+    /* =========================================================
+       CONTACT
+       ========================================================= */
+
+    .contact-section {
+      background: #0c0c0c;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 60px;
+    }
+
+    .contact-info h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 32px;
+      text-transform: uppercase;
+    }
+
+    .contact-info > p {
+      color: #999;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .contact-list {
+      margin-top: 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(201,155,69,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .contact-item small {
+      color: var(--gold-light);
+      font-size: 9px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .contact-item span {
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    /* =========================================================
+       FORM
+       ========================================================= */
+
+    .quote-form {
+      background: #111;
+      border: 1px solid #272727;
+      padding: 32px;
+    }
+
+    .quote-form h3 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      font-size: 19px;
+      margin-bottom: 23px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #aaa;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #303030;
+      background: #0a0a0a;
+      color: white;
+      padding: 12px 13px;
+      outline: none;
+      transition: 0.25s;
+      font-size: 13px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold-dark);
+    }
+
+    .form-group textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .form-group input[type="file"] {
+      padding: 9px;
+      color: #999;
+    }
+
+    .form-status {
+      margin-top: 13px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      background: #050505;
+      border-top: 1px solid #1e1e1e;
+      padding-top: 55px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 50px;
+      padding-bottom: 42px;
+    }
+
+    .footer-brand p {
+      color: #777;
+      max-width: 280px;
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    .footer-title {
+      color: var(--gold-light);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 9px;
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-contact p {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e1e1e;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: #666;
+      font-size: 10px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .socials a {
+      width: 27px;
+      height: 27px;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: 0.25s;
+    }
+
+    .socials a:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* =========================================================
+       FLOATING WHATSAPP
+       ========================================================= */
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #20c76a;
+      color: white;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      transition: 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+
+    .whatsapp-float svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    /* =========================================================
+       MOBILE ACTION BAR
+       ========================================================= */
+
+    .mobile-actions {
+      display: none;
+    }
+
+    /* =========================================================
+       ANIMATION
+       ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1000px) {
+
+      .nav-links {
+        gap: 17px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project.large {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      body {
+        padding-bottom: 58px;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .logo {
+        min-width: auto;
+      }
+
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .logo-text strong {
+        font-size: 16px;
+      }
+
+      .logo-text span {
+        font-size: 7px;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(5,5,5,0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 30px;
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 17px 0;
+        border-bottom: 1px solid #222;
+        font-size: 11px;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .quote-nav {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .menu-btn {
+        display: flex;
+      }
+
+      .menu-btn.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .menu-btn.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-btn.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .hero {
+        margin-top: 68px;
+        min-height: 650px;
+        background-position: 62% center;
+      }
+
+      .hero-content {
+        padding: 70px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: clamp(37px, 12vw, 58px);
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-stats {
+        margin-top: 35px;
+        overflow-x: auto;
+      }
+
+      .stat {
+        min-width: 120px;
+        padding-right: 18px;
+        margin-right: 18px;
+      }
+
+      .stat strong {
+        font-size: 18px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-card {
+        min-height: 190px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project.large {
+        grid-column: span 1;
+      }
+
+      .project {
+        aspect-ratio: 16 / 10;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .about-image {
+        min-height: 350px;
+      }
+
+      .about-image img {
+        height: 350px;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .quote-form {
+        padding: 22px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        padding: 18px 0 70px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .whatsapp-float {
+        right: 15px;
+        bottom: 72px;
+      }
+
+      .mobile-actions {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 58px;
+        z-index: 998;
+        background: #090909;
+        border-top: 1px solid #292929;
+      }
+
+      .mobile-actions a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ddd;
+        font-size: 9px;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-right: 1px solid #292929;
+      }
+
+      .mobile-actions a:last-child {
+        background: var(--gold);
+        color: #000;
+        border: 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service-card {
+        padding: 17px 8px;
+      }
+
+      .service-icon {
+        width: 47px;
+        height: 47px;
+      }
+
+      .service-card h3 {
+        font-size: 9px;
+      }
+
+      .service-card p {
+        font-size: 9px;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .stat {
+        border-right: 0;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header id="siteHeader">
-  <div class="wrap">
-    <a href="#top" class="logo">Chandu <em>Interiors</em></a>
-    <nav id="mainNav">
-      <a class="navlink" href="#services">Services</a>
-      <a class="navlink" href="#gallery">Gallery</a>
-      <a class="navlink" href="#reviews">Reviews</a>
-      <a class="navlink" href="#about">About</a>
-      <a class="navlink" href="#faq">FAQ</a>
-      <a class="navlink btn" href="#quote">Get a Free Quote</a>
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header class="header" id="header">
+  <div class="container nav">
+
+    <a href="#home" class="logo">
+
+      <div class="logo-mark"></div>
+
+      <div class="logo-text">
+        <strong>CHANDU</strong>
+        <span>INTERIOR DESIGNS</span>
+      </div>
+
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+
+      <a href="#home" class="active">Home</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About Us</a>
+      <a href="#why">Why Choose Us</a>
+      <a href="#contact">Contact</a>
+
+      <a href="#quote" class="quote-nav">
+        Get a Quote
+      </a>
+
     </nav>
-    <button class="mobile-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
   </div>
 </header>
 
-<div id="top"></div>
 
-<section class="hero">
-  <div class="blueprint-lines"></div>
-  <div class="wrap inner">
-    <div class="eyebrow">Chandu Interiors</div>
-    <h1>Transforming houses into <em>beautiful</em> homes.</h1>
-    <p class="lede">From custom furniture and wardrobes to complete interior and woodwork solutions — quality materials, modern designs, and skilled craftsmanship, built for your space.</p>
-    <div class="ctas">
-      <a href="#quote" class="btn solid">Get a Free Quote</a>
-      <a href="https://wa.me/919390608457" class="btn">WhatsApp Us</a>
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-content reveal">
+
+    <div class="hero-label">
+      WE DESIGN YOUR
     </div>
+
+    <h1>
+      DREAM SPACE<br>
+      <span>INTO REALITY</span>
+    </h1>
+
+    <p class="hero-description">
+      We create stunning interiors that reflect your personality,
+      lifestyle and comfort — designed with precision and crafted
+      with care.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="tel:+919390608457" class="btn">
+        ☎ Call Now
+      </a>
+
+      <a href="https://wa.me/919390608457"
+         target="_blank"
+         rel="noopener"
+         class="btn btn-outline">
+        ◉ WhatsApp Us
+      </a>
+
+      <a href="#quote" class="btn btn-outline">
+        Get Free Quote
+      </a>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="stat">
+        <strong>20+</strong>
+        <span>Years Experience</span>
+      </div>
+
+      <div class="stat">
+        <strong>500+</strong>
+        <span>Projects</span>
+      </div>
+
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Customer Focus</span>
+      </div>
+
+    </div>
+
   </div>
+
 </section>
 
-<div class="features">
-  <div class="wrap">
-    <div class="feature-grid">
-      <div class="feature-item">Custom Designs</div>
-      <div class="feature-item">Quality Materials</div>
-      <div class="feature-item">Skilled Craftsmanship</div>
-      <div class="feature-item">On-Time Work</div>
-      <div class="feature-item">Modern &amp; Traditional</div>
-      <div class="feature-item">Affordable Solutions</div>
-      <div class="feature-item">Customer-Focused</div>
-      <div class="feature-item">Free Consultation</div>
-    </div>
-  </div>
-</div>
 
-<section id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Our Services</div>
-        <h2>Everything for your space, in-house.</h2>
+<!-- =========================================================
+     SERVICES
+     ========================================================= -->
+
+<section class="section" id="services">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <div class="section-kicker">What We Do</div>
+
+      <h2 class="section-title">
+        Our Services
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p class="section-description">
+        Complete interior solutions designed around your
+        space, lifestyle and personal taste.
+      </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+      <!-- SERVICE 1 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 21h18"/>
+            <path d="M5 21V8l7-5 7 5v13"/>
+            <path d="M8 21v-6h8v6"/>
+            <path d="M9 9h6"/>
+          </svg>
+        </div>
+
+        <h3>Modular Kitchen</h3>
+
+        <p>
+          Stylish, efficient and custom-designed kitchens.
+        </p>
+
       </div>
-      <p>From a single custom piece to a complete home fit-out — designed, built, and installed by our own team.</p>
+
+
+      <!-- SERVICE 2 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="3" width="16" height="18"/>
+            <path d="M12 3v18"/>
+            <circle cx="10" cy="12" r=".7"/>
+            <circle cx="14" cy="12" r=".7"/>
+          </svg>
+        </div>
+
+        <h3>Wardrobes</h3>
+
+        <p>
+          Smart storage with beautiful customized designs.
+        </p>
+
+      </div>
+
+
+      <!-- SERVICE 3 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="11"/>
+            <path d="M7 20h10"/>
+            <path d="M9 16v4"/>
+            <path d="M15 16v4"/>
+          </svg>
+        </div>
+
+        <h3>Living Room</h3>
+
+        <p>
+          Elegant TV units and comfortable living spaces.
+        </p>
+
+      </div>
+
+
+      <!-- SERVICE 4 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 11v7"/>
+            <path d="M20 11v7"/>
+            <path d="M4 14h16"/>
+            <path d="M6 10V8a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"/>
+            <path d="M4 18v2"/>
+            <path d="M20 18v2"/>
+          </svg>
+        </div>
+
+        <h3>Bedroom</h3>
+
+        <p>
+          Comfortable bedroom interiors with elegant details.
+        </p>
+
+      </div>
+
+
+      <!-- SERVICE 5 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 8h18"/>
+            <path d="M5 8l2 10h10l2-10"/>
+            <path d="M7 4h10"/>
+            <path d="M9 4v4"/>
+            <path d="M15 4v4"/>
+          </svg>
+        </div>
+
+        <h3>False Ceiling</h3>
+
+        <p>
+          Modern ceiling designs with premium finishing.
+        </p>
+
+      </div>
+
+
+      <!-- SERVICE 6 -->
+
+      <div class="service-card reveal">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 21h18"/>
+            <path d="M5 21V9l7-6 7 6v12"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+        </div>
+
+        <h3>Full Home Interiors</h3>
+
+        <p>
+          Complete interior solutions for your home.
+        </p>
+
+      </div>
+
     </div>
+
   </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div><span class="num">01</span><h3>Furniture</h3><p>Custom-designed beds, sofas, dining tables and more, built for your space and requirements.</p></div>
-      <div class="tags"><span>Beds</span><span>Sofas</span><span>Dining Tables</span><span>Study Tables</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div><span class="num">02</span><h3>Cupboards &amp; Wardrobes</h3><p>Modular cupboards, sliding-door wardrobes and customized bedroom storage solutions.</p></div>
-      <div class="tags"><span>Modular</span><span>Sliding Door</span><span>Walk-in</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div><span class="num">03</span><h3>Modular Kitchen</h3><p>Functional, stylish modular kitchen designs created around your space and lifestyle.</p></div>
-      <div class="tags"><span>Cabinets</span><span>Storage</span><span>Modern Finish</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div><span class="num">04</span><h3>TV Units</h3><p>Modern, wall-mounted and storage TV units with attractive, practical designs.</p></div>
-      <div class="tags"><span>Wall-Mounted</span><span>Storage</span><span>Designer Panels</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div><span class="num">05</span><h3>False Ceiling</h3><p>Beautiful false-ceiling designs for homes, offices and commercial spaces.</p></div>
-      <div class="tags"><span>Living Room</span><span>Office</span><span>Commercial</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div><span class="num">06</span><h3>Interior Woodwork</h3><p>Wall panels, shelving, partitions, doors and decorative woodwork, customized to your needs.</p></div>
-      <div class="tags"><span>Panels</span><span>Partitions</span><span>Shelving</span></div>
-    </div>
-  </div>
-  <div class="wrap" style="margin-top:2px;">
-    <div class="service-card reveal bracket" style="border:1px solid var(--line); background:var(--stone-2);">
-      <span class="bl"></span><span class="br"></span>
-      <div><span class="num">07</span><h3>Complete Home Interiors</h3><p>End-to-end interior solutions for the living room, bedroom, kitchen, dining area, pooja room and study — one team, start to finish.</p></div>
-      <div class="tags"><span>Living Room</span><span>Bedroom</span><span>Kitchen</span><span>Pooja Room</span><span>Study</span></div>
-    </div>
-  </div>
+
 </section>
 
-<section id="gallery" class="on-tint">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Our Work</div>
-        <h2>Explore completed projects</h2>
+
+<!-- =========================================================
+     PROJECTS
+     ========================================================= -->
+
+<section class="section section-dark" id="projects">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <div class="section-kicker">
+        Our Portfolio
       </div>
-      <p>A look at recent interiors, furniture and woodwork across homes we've worked on.</p>
+
+      <h2 class="section-title">
+        Our Projects
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p class="section-description">
+        Explore some of our interior design work and
+        customized furniture solutions.
+      </p>
+
     </div>
+
+
+    <div class="project-filters">
+
+      <button class="filter-btn active" data-filter="all">
+        All
+      </button>
+
+      <button class="filter-btn" data-filter="kitchen">
+        Kitchen
+      </button>
+
+      <button class="filter-btn" data-filter="living">
+        Living Room
+      </button>
+
+      <button class="filter-btn" data-filter="bedroom">
+        Bedroom
+      </button>
+
+      <button class="filter-btn" data-filter="wardrobe">
+        Wardrobes
+      </button>
+
+      <button class="filter-btn" data-filter="interior">
+        Interiors
+      </button>
+
+    </div>
+
+
+    <div class="projects-grid" id="projectsGrid">
+
+
+      <!-- PROJECT 1 -->
+
+      <article class="project large reveal"
+               data-category="living interior">
+
+        <img
+          src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=85"
+          alt="Luxury living room interior"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Living Room</span>
+          <h3>Luxury TV Unit</h3>
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 2 -->
+
+      <article class="project reveal"
+               data-category="kitchen interior">
+
+        <img
+          src="https://images.unsplash.com/photo-1556912173-3bb406ef7e8a?auto=format&fit=crop&w=1000&q=85"
+          alt="Modern modular kitchen"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Kitchen</span>
+          <h3>Modern Modular Kitchen</h3>
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 3 -->
+
+      <article class="project reveal"
+               data-category="bedroom interior">
+
+        <img
+          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=85"
+          alt="Luxury bedroom interior"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Bedroom</span>
+          <h3>Premium Bedroom</h3>
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 4 -->
+
+      <article class="project reveal"
+               data-category="wardrobe">
+
+        <img
+          src="https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=1000&q=85"
+          alt="Modern wardrobe"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Wardrobe</span>
+          <h3>Designer Wardrobe</h3>
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 5 -->
+
+      <article class="project reveal"
+               data-category="interior living">
+
+        <img
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
+          alt="Premium home interior"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Interiors</span>
+          <h3>Complete Home Interior</h3>
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 6 -->
+
+      <article class="project reveal"
+               data-category="kitchen">
+
+        <img
+          src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85"
+          alt="Premium kitchen interior"
+          loading="lazy">
+
+        <div class="project-info">
+          <span>Kitchen</span>
+          <h3>Elegant Kitchen Design</h3>
+        </div>
+
+      </article>
+
+
+    </div>
+
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#8a9179,#57654c);"></div><div class="label"><span class="l1">Living Room</span><span class="l2">TV Units &amp; Panels</span></div></div>
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#b08d57,#8a6b3e);"></div><div class="label"><span class="l1">Bedroom</span><span class="l2">Wardrobes &amp; Storage</span></div></div>
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#4a463f,#2d2a25);"></div><div class="label"><span class="l1">Kitchen</span><span class="l2">Modular Layouts</span></div></div>
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#9c5a3c,#764431);"></div><div class="label"><span class="l1">Furniture</span><span class="l2">Beds &amp; Dining</span></div></div>
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#3c4635,#242a1e);"></div><div class="label"><span class="l1">Woodwork</span><span class="l2">Partitions &amp; Panels</span></div></div>
-    <div class="gallery-tile reveal"><div class="tone" style="background:linear-gradient(135deg,#c9c3b6,#8a8477);"></div><div class="label"><span class="l1">False Ceiling</span><span class="l2">Home &amp; Office</span></div></div>
-  </div>
-  <div class="wrap" style="margin-top:36px; text-align:center;">
-    <a href="#gallery" class="btn">View Our Gallery →</a>
-    <p style="font-size:12.5px; color:var(--charcoal); margin-top:14px;">Project photos shown here represent our work and selected design inspirations.</p>
-  </div>
+
 </section>
 
-<section id="reviews">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Customer Reviews</div>
-        <h2>Our customers' satisfaction is our priority.</h2>
+
+<!-- =========================================================
+     ABOUT
+     ========================================================= -->
+
+<section class="section" id="about">
+
+  <div class="container about">
+
+
+    <div class="about-image reveal">
+
+      <img
+        src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85"
+        alt="Chandu Interior Designs premium interior">
+
+      <div class="about-badge">
+
+        <strong>20+</strong>
+
+        <span>
+          Years of Experience
+        </span>
+
       </div>
-      <p>Real feedback from homes and offices we've worked on.</p>
+
     </div>
-    <div class="reviews-grid reveal">
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Quality work and beautiful finishing."</p></div>
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Excellent interior work and professional service."</p></div>
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Good designs, reasonable pricing and timely completion."</p></div>
+
+
+    <div class="about-content reveal">
+
+      <div class="section-kicker">
+        About Us
+      </div>
+
+      <h2 class="section-title">
+        Creating Spaces<br>
+        You'll Love to Live In
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p>
+        At Chandu Interior Designs, we believe every space
+        has a story. Our mission is to transform your ideas
+        into beautiful, functional and timeless interiors.
+      </p>
+
+      <p>
+        From customized furniture and wardrobes to modular
+        kitchens and complete home interiors, we combine
+        thoughtful design with quality craftsmanship.
+      </p>
+
+      <p>
+        Every project is carefully planned around your
+        lifestyle, requirements and budget.
+      </p>
+
+      <div class="signature">
+        Chandu
+      </div>
+
+      <span class="signature-label">
+        Founder, Chandu Interior Designs
+      </span>
+
     </div>
-    <div style="text-align:center; margin-top:34px;">
-      <a href="#" class="btn">Leave a Google Review →</a>
-    </div>
+
   </div>
+
 </section>
 
-<div class="cta-band">
-  <div class="wrap reveal">
-    <div class="eyebrow" style="justify-content:center; color:var(--brass);">Let's Talk</div>
-    <h2>Ready to transform your space?</h2>
-    <p>Let's discuss your ideas and create an interior that matches your style and budget.</p>
-    <div class="ctas">
-      <a href="tel:+919390608457" class="btn brass">Call Us</a>
-      <a href="https://wa.me/919390608457" class="btn on-dark">WhatsApp Us</a>
-      <a href="#quote" class="btn on-dark">Get a Free Quote</a>
-    </div>
-  </div>
-</div>
 
-<section id="about">
-  <div class="wrap about-grid">
-    <div class="reveal">
-      <div class="eyebrow">About Chandu Interiors</div>
-      <h2 style="font-size:clamp(28px,3.6vw,42px); margin:16px 0 22px;">Design and craftsmanship, under one roof.</h2>
-      <p>Chandu Interiors provides customized interior, furniture, and woodwork solutions for homes and commercial spaces.</p>
-      <p>Our goal is to combine modern design, quality materials, skilled workmanship, and your requirements to create spaces that are beautiful, comfortable, and practical.</p>
-      <p>Whether you need a single customized wardrobe or complete home interiors, our team works with you from design to completion.</p>
-    </div>
-    <div class="reveal">
-      <div class="mv-block bracket">
-        <span class="bl"></span><span class="br"></span>
-        <div class="eyebrow">Our Mission</div>
-        <p>To provide high-quality interior and furniture solutions that make every space more functional, stylish, and comfortable.</p>
+<!-- =========================================================
+     WHY CHOOSE US
+     ========================================================= -->
+
+<section class="section why-section" id="why">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <div class="section-kicker">
+        Why Us
       </div>
-      <div class="mv-block bracket">
-        <span class="bl"></span><span class="br"></span>
-        <div class="eyebrow">Our Vision</div>
-        <p>To become a trusted name in interior design and customized woodwork by delivering quality workmanship and excellent customer service.</p>
-      </div>
+
+      <h2 class="section-title">
+        Why Choose Chandu?
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p class="section-description">
+        We focus on quality, transparency and craftsmanship
+        to make every project a success.
+      </p>
+
     </div>
+
+
+    <div class="why-grid">
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3>20+ Years Experience</h3>
+          <p>
+            Expertise you can trust for your dream home.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3l2.8 5.7L21 9.6l-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3>Quality Materials</h3>
+          <p>
+            We use quality materials and hardware for
+            long-lasting interiors.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 5h16v14H4z"/>
+            <path d="M8 9h8"/>
+            <path d="M8 13h5"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3>Custom Design</h3>
+          <p>
+            Every design is tailored to your style and needs.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3>On-Time Delivery</h3>
+          <p>
+            We value your time and deliver as promised.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          ₹
+        </div>
+
+        <div>
+          <h3>Affordable Pricing</h3>
+          <p>
+            Beautiful interiors at competitive prices.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="why-item reveal">
+
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3>20 Years Warranty</h3>
+          <p>
+            Long-term assurance for your peace of mind.
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+
   </div>
+
 </section>
 
-<section id="faq" class="on-tint">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">FAQ</div>
-        <h2>Frequently asked questions</h2>
+
+<!-- =========================================================
+     REVIEWS
+     ========================================================= -->
+
+<section class="section" id="reviews">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <div class="section-kicker">
+        Testimonials
       </div>
-      <p>Everything you need to know before you get in touch.</p>
+
+      <h2 class="section-title">
+        What Our Clients Say
+      </h2>
+
+      <div class="gold-line"></div>
+
     </div>
-    <div class="faq-list reveal" id="faqList">
-      <div class="faq-item">
-        <button class="faq-q">Do you provide customized designs?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. We provide customized designs according to your space, requirements, and preferences.</p></div>
+
+
+    <div class="reviews-grid">
+
+
+      <div class="review-card reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          Excellent interior work and professional service.
+          The finishing quality was exactly what we expected.
+        </p>
+
+        <div class="review-author">
+          Happy Home Owner
+        </div>
+
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Do you provide home interior services?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. We provide interior solutions for living rooms, bedrooms, kitchens, and other areas.</p></div>
+
+
+      <div class="review-card reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          Very good designs, quality materials and reasonable
+          pricing. The complete project was handled smoothly.
+        </p>
+
+        <div class="review-author">
+          Verified Customer
+        </div>
+
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I share my own design?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. You can share your reference images or designs with us through WhatsApp.</p></div>
+
+
+      <div class="review-card reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          We loved the final result. The team understood our
+          requirements and created a beautiful home.
+        </p>
+
+        <div class="review-author">
+          Happy Customer
+        </div>
+
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Do you provide a quotation before starting the work?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. Project requirements can be discussed and a quotation can be prepared before proceeding.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Do you take small projects?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. You can contact us with your requirements and we can discuss the project.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How can I contact Chandu Interiors?<span class="plus">+</span></button>
-        <div class="faq-a"><p>You can call us, send a WhatsApp message, or use the contact form on our website.</p></div>
-      </div>
+
+
     </div>
+
   </div>
+
 </section>
 
-<section id="quote" class="on-dark">
-  <div class="wrap contact-grid">
+
+<!-- =========================================================
+     CTA
+     ========================================================= -->
+
+<section class="cta">
+
+  <div class="container cta-content reveal">
+
+    <div class="section-kicker">
+      Let's Create Together
+    </div>
+
+    <h2>
+      Let's Design Something Amazing Together!
+    </h2>
+
+    <p>
+      Get a free consultation and quotation for your project.
+    </p>
+
+    <div class="cta-buttons">
+
+      <a href="tel:+919390608457"
+         class="btn">
+        ☎ Call Now
+      </a>
+
+      <a href="https://wa.me/919390608457"
+         target="_blank"
+         rel="noopener"
+         class="btn btn-outline">
+        ◉ WhatsApp Us
+      </a>
+
+      <a href="#quote"
+         class="btn">
+        Get Free Quote
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+     ========================================================= -->
+
+<section class="section section-dark" id="faq">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <div class="section-kicker">
+        FAQ
+      </div>
+
+      <h2 class="section-title">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="gold-line"></div>
+
+    </div>
+
+
+    <div class="faq-list">
+
+
+      <div class="faq-item reveal">
+
+        <button class="faq-question">
+          Do you provide customized interior designs?
+          <span class="faq-plus">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. We create customized designs based on your
+            space, lifestyle, preferences and budget.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="faq-item reveal">
+
+        <button class="faq-question">
+          Do you provide complete home interiors?
+          <span class="faq-plus">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. We provide complete interior solutions
+            including living rooms, bedrooms, kitchens,
+            wardrobes, TV units, false ceilings and more.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="faq-item reveal">
+
+        <button class="faq-question">
+          Can I share my own design or reference photo?
+          <span class="faq-plus">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. You can share reference images, drawings or
+            ideas through WhatsApp or the quote form.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="faq-item reveal">
+
+        <button class="faq-question">
+          Do you provide a quotation before starting?
+          <span class="faq-plus">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. We discuss your requirements and provide
+            a quotation before starting the project.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="faq-item reveal">
+
+        <button class="faq-question">
+          Do you take small interior projects?
+          <span class="faq-plus">+</span>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. You can contact us with your requirement
+            and our team will discuss the project with you.
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT + QUOTE
+     ========================================================= -->
+
+<section class="section contact-section" id="contact">
+
+  <div class="container contact-grid">
+
+
+    <!-- CONTACT INFO -->
+
     <div class="contact-info reveal">
-      <div class="eyebrow">Get in Touch</div>
-      <h2>Get your free quote</h2>
-      <p>Have an interior or furniture requirement? Tell us about your project and our team will get in touch with you.</p>
-      <div class="contact-detail"><span class="l">Phone</span><span class="v"><a href="tel:+919390608457">+91 93906 08457</a></span></div>
-      <div class="contact-detail"><span class="l">WhatsApp</span><span class="v"><a href="https://wa.me/919390608457">+91 93906 08457</a></span></div>
-      <div class="contact-detail"><span class="l">Email</span><span class="v"><a href="mailto:chanduinteriors7@gmail.com">chanduinteriors7@gmail.com</a></span></div>
-      <div class="contact-detail"><span class="l">Address</span><span class="v">Hyderabad & Visakhapatnam, Andhra Pradesh</span></div>
-      <div class="hours">
-        <div class="row"><span>Monday – Saturday</span><span>9:00 AM – 7:00 PM</span></div>
-        <div class="row"><span>Sunday</span><span>By Appointment</span></div>
+
+      <div class="section-kicker">
+        Get In Touch
       </div>
+
+      <h2>
+        Let's Talk About<br>
+        Your Dream Space
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p>
+        Have an interior or furniture requirement?
+        Tell us about your project and our team will
+        get in touch with you.
+      </p>
+
+
+      <div class="contact-list">
+
+
+        <div class="contact-item">
+
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 16.9v3a2 2 0 0 1-2.2 2
+                       19.8 19.8 0 0 1-8.6-3.1
+                       19.5 19.5 0 0 1-6-6
+                       19.8 19.8 0 0 1-3.1-8.6
+                       A2 2 0 0 1 4.1 2h3
+                       a2 2 0 0 1 2 1.7
+                       c.1 1 .4 2 .7 2.9
+                       a2 2 0 0 1-.5 2.1L8 9.9
+                       a16 16 0 0 0 6 6l1.2-1.2
+                       a2 2 0 0 1 2.1-.5
+                       c.9.3 1.9.6 2.9.7
+                       A2 2 0 0 1 22 16.9z"/>
+            </svg>
+          </div>
+
+          <div>
+            <small>Phone</small>
+            <span>
+              <a href="tel:+919390608457">
+                +91 93906 08457
+              </a>
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <div class="contact-icon">
+            ◉
+          </div>
+
+          <div>
+            <small>WhatsApp</small>
+            <span>
+              <a href="https://wa.me/919390608457"
+                 target="_blank"
+                 rel="noopener">
+                +91 93906 08457
+              </a>
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <div class="contact-icon">
+            @
+          </div>
+
+          <div>
+            <small>Email</small>
+            <span>
+              <a href="mailto:chanduinteriors7@gmail.com">
+                chanduinteriors7@gmail.com
+              </a>
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <div class="contact-icon">
+            ⌖
+          </div>
+
+          <div>
+            <small>Location</small>
+            <span>
+              Hyderabad & Visakhapatnam, Andhra Pradesh
+            </span>
+          </div>
+
+        </div>
+
+
+      </div>
+
     </div>
-    <form id="quoteForm" class="reveal">
-      <div class="form-row">
-        <div class="field"><label for="qname">Name</label><input type="text" id="qname" name="Name" required></div>
-        <div class="field"><label for="qphone">Phone Number</label><input type="tel" id="qphone" name="Phone" required></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="qwhatsapp">WhatsApp Number</label><input type="tel" id="qwhatsapp" name="WhatsApp"></div>
-        <div class="field"><label for="qlocation">Location</label><input type="text" id="qlocation" name="Location" required></div>
-      </div>
-      <div class="field">
-        <label for="qservice">Service Required</label>
-        <select id="qservice" name="Service Required">
-          <option>Furniture</option>
-          <option>Wardrobe</option>
-          <option>Modular Kitchen</option>
-          <option>TV Unit</option>
-          <option>False Ceiling</option>
-          <option>Woodwork</option>
-          <option>Complete Home Interiors</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="qdetails">Project Details</label>
-        <textarea id="qdetails" name="Project Details" placeholder="Tell us about your requirements" required></textarea>
-      </div>
-      <div class="field">
-        <label for="qphotos">Upload Photos / Design</label>
-        <input type="file" id="qphotos" name="Photos" accept="image/*" multiple>
-      </div>
-      <div class="submit-row">
-        <button type="submit" class="btn brass" id="quoteSubmitBtn">Submit Request</button>
-        <span class="form-note" id="quoteFormNote">We'll contact you to discuss your requirements.</span>
-      </div>
-    </form>
+
+
+    <!-- QUOTE FORM -->
+
+    <div class="quote-form reveal" id="quote">
+
+      <h3>
+        Get Your Free Quote
+      </h3>
+
+      <form id="quoteForm">
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="qname">
+              Name
+            </label>
+
+            <input
+              type="text"
+              id="qname"
+              name="Name"
+              placeholder="Your Name"
+              required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="qphone">
+              Phone Number
+            </label>
+
+            <input
+              type="tel"
+              id="qphone"
+              name="Phone"
+              placeholder="Your Phone Number"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="qwhatsapp">
+              WhatsApp Number
+            </label>
+
+            <input
+              type="tel"
+              id="qwhatsapp"
+              name="WhatsApp"
+              placeholder="WhatsApp Number">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="qlocation">
+              Location
+            </label>
+
+            <input
+              type="text"
+              id="qlocation"
+              name="Location"
+              placeholder="Project Location"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="qservice">
+            Service Required
+          </label>
+
+          <select
+            id="qservice"
+            name="Service Required">
+
+            <option value="Modular Kitchen">
+              Modular Kitchen
+            </option>
+
+            <option value="Wardrobes">
+              Wardrobes
+            </option>
+
+            <option value="Living Room">
+              Living Room
+            </option>
+
+            <option value="Bedroom">
+              Bedroom
+            </option>
+
+            <option value="False Ceiling">
+              False Ceiling
+            </option>
+
+            <option value="Furniture">
+              Furniture
+            </option>
+
+            <option value="Complete Home Interiors">
+              Complete Home Interiors
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="qdetails">
+            Project Details
+          </label>
+
+          <textarea
+            id="qdetails"
+            name="Project Details"
+            placeholder="Tell us about your requirements..."
+            required></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="qphotos">
+            Upload Photos / Design
+          </label>
+
+          <input
+            type="file"
+            id="qphotos"
+            name="Photos"
+            accept="image/*"
+            multiple>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn"
+          id="quoteSubmitBtn">
+
+          Submit Request
+
+        </button>
+
+
+        <div
+          class="form-status"
+          id="quoteFormNote">
+
+          We'll contact you to discuss your requirements.
+
+        </div>
+
+      </form>
+
+    </div>
+
   </div>
+
 </section>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 
 <footer>
-  <div class="wrap">
+
+  <div class="container">
+
     <div class="footer-grid">
-      <div>
-        <div class="footer-logo">Chandu <em style="color:var(--brass); font-style:italic;">Interiors</em></div>
-        <p>Beautiful Spaces. Quality Craftsmanship. Built for You.</p>
+
+
+      <div class="footer-brand">
+
+        <a href="#home" class="logo">
+
+          <div class="logo-mark"></div>
+
+          <div class="logo-text">
+
+            <strong>CHANDU</strong>
+
+            <span>
+              INTERIOR DESIGNS
+            </span>
+
+          </div>
+
+        </a>
+
+        <p>
+          Transforming houses into beautiful,
+          functional and timeless homes through
+          thoughtful design and quality craftsmanship.
+        </p>
+
       </div>
-      <div class="footer-col">
-        <div class="eyebrow">Quick Links</div>
-        <a href="#top">Home</a>
-        <a href="#about">About</a>
+
+
+      <div class="footer-links">
+
+        <div class="footer-title">
+          Quick Links
+        </div>
+
+        <a href="#home">Home</a>
         <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#quote">Contact</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About Us</a>
+        <a href="#why">Why Choose Us</a>
+        <a href="#contact">Contact</a>
+
       </div>
-      <div class="footer-col">
-        <div class="eyebrow">Contact</div>
-        <div class="line">Phone: +91 93906 08457</div>
-        <div class="line">WhatsApp: +91 93906 08457</div>
-        <div class="line">Hyderabad & Visakhapatnam, AP</div>
+
+
+      <div class="footer-contact">
+
+        <div class="footer-title">
+          Contact Us
+        </div>
+
+        <p>
+          ☎ +91 93906 08457
+        </p>
+
+        <p>
+          ◉ +91 93906 08457
+        </p>
+
+        <p>
+          ✉ chanduinteriors7@gmail.com
+        </p>
+
+        <p>
+          ⌖ Hyderabad & Visakhapatnam, Andhra Pradesh
+        </p>
+
       </div>
+
     </div>
+
+
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Chandu Interiors. All Rights Reserved.</span>
-      <span>Furniture · Wardrobes · Modular Kitchen · TV Units · False Ceiling · Woodwork</span>
+
+      <span>
+        © <span id="year"></span>
+        Chandu Interior Designs.
+        All Rights Reserved.
+      </span>
+
+      <div class="socials">
+
+        <a href="#" aria-label="Facebook">
+          f
+        </a>
+
+        <a href="#" aria-label="Instagram">
+          ◎
+        </a>
+
+        <a href="#" aria-label="YouTube">
+          ▶
+        </a>
+
+      </div>
+
     </div>
+
   </div>
+
 </footer>
 
-<div class="action-bar">
-  <div class="wrap">
-    <a href="tel:+919390608457">Call</a>
-    <a href="https://wa.me/919390608457">WhatsApp</a>
-    <a href="#quote">Free Quote</a>
-  </div>
+
+<!-- =========================================================
+     MOBILE BOTTOM ACTIONS
+     ========================================================= -->
+
+<div class="mobile-actions">
+
+  <a href="tel:+919390608457">
+    ☎ Call
+  </a>
+
+  <a href="https://wa.me/919390608457"
+     target="_blank"
+     rel="noopener">
+    ◉ WhatsApp
+  </a>
+
+  <a href="#quote">
+    Get Quote
+  </a>
+
 </div>
 
+
+<!-- =========================================================
+     FLOATING WHATSAPP
+     ========================================================= -->
+
+<a
+  href="https://wa.me/919390608457"
+  target="_blank"
+  rel="noopener"
+  class="whatsapp-float"
+  aria-label="Chat on WhatsApp">
+
+  <svg viewBox="0 0 32 32">
+    <path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.5c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 1 1 16 26.5zm5.7-7.7c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.8-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.8.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/>
+  </svg>
+
+</a>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
 
-  const toggle = document.getElementById('navToggle');
-  const header = document.getElementById('siteHeader');
-  toggle.addEventListener('click', () => {
-    const open = header.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  document.querySelectorAll('#mainNav a').forEach(a => {
-    a.addEventListener('click', () => { header.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
-  });
+  /* =========================================================
+     YEAR
+     ========================================================= */
 
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      const answer = item.querySelector('.faq-a');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(o => {
-        o.classList.remove('open');
-        o.querySelector('.faq-a').style.maxHeight = null;
-      });
-      if (!isOpen){
-        item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
-    });
-  });
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ---- Quote form: submits to the Flask backend at /api/quote ----
-  // Change API_BASE to your deployed backend URL, e.g. "https://api.chanduinteriors.com"
-  const API_BASE = "http://localhost:5000";
+  /* =========================================================
+     HEADER SCROLL
+     ========================================================= */
 
-  const quoteForm = document.getElementById('quoteForm');
-  const submitBtn = document.getElementById('quoteSubmitBtn');
-  const formNote = document.getElementById('quoteFormNote');
+  const header = document.getElementById("header");
 
-  quoteForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+  window.addEventListener("scroll", function () {
 
-    try {
-      const formData = new FormData(quoteForm);
-      const res = await fetch(`${API_BASE}/api/quote`, { method: 'POST', body: formData });
-      const data = await res.json();
-
-      if (res.ok && data.ok) {
-        formNote.textContent = "Thanks! We'll contact you shortly.";
-        formNote.style.color = '#57654c';
-        quoteForm.reset();
-      } else {
-        formNote.textContent = data.error || 'Something went wrong. Please call or WhatsApp us instead.';
-        formNote.style.color = '#9c5a3c';
-      }
-    } catch (err) {
-      formNote.textContent = 'Could not reach the server. Please call or WhatsApp us instead.';
-      formNote.style.color = '#9c5a3c';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Request';
+    if (window.scrollY > 30) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
     }
+
   });
+
+
+  /* =========================================================
+     MOBILE MENU
+     ========================================================= */
+
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn.addEventListener("click", function () {
+
+    menuBtn.classList.toggle("active");
+    navLinks.classList.toggle("open");
+    document.body.classList.toggle("menu-open");
+
+  });
+
+
+  document.querySelectorAll(".nav-links a").forEach(function(link) {
+
+    link.addEventListener("click", function () {
+
+      menuBtn.classList.remove("active");
+      navLinks.classList.remove("open");
+      document.body.classList.remove("menu-open");
+
+    });
+
+  });
+
+
+  /* =========================================================
+     PROJECT FILTER
+     ========================================================= */
+
+  const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
+  const projects =
+    document.querySelectorAll(".project");
+
+
+  filterButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      filterButtons.forEach(function(btn) {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const filter = button.dataset.filter;
+
+      projects.forEach(function(project) {
+
+        const categories =
+          project.dataset.category.split(" ");
+
+        if (
+          filter === "all" ||
+          categories.includes(filter)
+        ) {
+
+          project.classList.remove("hide");
+
+        } else {
+
+          project.classList.add("hide");
+
+        }
+
+      });
+
+    });
+
+  });
+
+
+  /* =========================================================
+     FAQ
+     ========================================================= */
+
+  document.querySelectorAll(".faq-question")
+    .forEach(function(button) {
+
+      button.addEventListener("click", function() {
+
+        const item =
+          button.parentElement;
+
+        const answer =
+          item.querySelector(".faq-answer");
+
+        const isOpen =
+          item.classList.contains("open");
+
+
+        document
+          .querySelectorAll(".faq-item.open")
+          .forEach(function(openItem) {
+
+            openItem.classList.remove("open");
+
+            openItem
+              .querySelector(".faq-answer")
+              .style.maxHeight = null;
+
+          });
+
+
+        if (!isOpen) {
+
+          item.classList.add("open");
+
+          answer.style.maxHeight =
+            answer.scrollHeight + "px";
+
+        }
+
+      });
+
+    });
+
+
+  /* =========================================================
+     SCROLL REVEAL
+     ========================================================= */
+
+  const revealObserver =
+    new IntersectionObserver(
+      function(entries) {
+
+        entries.forEach(function(entry) {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.10
+      }
+    );
+
+
+  document
+    .querySelectorAll(".reveal")
+    .forEach(function(element) {
+
+      revealObserver.observe(element);
+
+    });
+
+
+  /* =========================================================
+     ACTIVE NAVIGATION
+     ========================================================= */
+
+  const sections =
+    document.querySelectorAll("section[id]");
+
+  const navAnchors =
+    document.querySelectorAll(
+      ".nav-links a:not(.quote-nav)"
+    );
+
+
+  window.addEventListener("scroll", function() {
+
+    let current = "";
+
+    sections.forEach(function(section) {
+
+      const sectionTop =
+        section.offsetTop - 130;
+
+      if (
+        window.scrollY >= sectionTop
+      ) {
+
+        current = section.getAttribute("id");
+
+      }
+
+    });
+
+
+    navAnchors.forEach(function(anchor) {
+
+      anchor.classList.remove("active");
+
+      if (
+        anchor.getAttribute("href") ===
+        "#" + current
+      ) {
+
+        anchor.classList.add("active");
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================================================
+     QUOTE FORM
+     EXISTING FLASK API CONNECTION
+     ========================================================= */
+
+  const API_BASE = "";
+
+  const quoteForm =
+    document.getElementById("quoteForm");
+
+  const submitButton =
+    document.getElementById("quoteSubmitBtn");
+
+  const formNote =
+    document.getElementById("quoteFormNote");
+
+
+  quoteForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Sending...";
+
+      formNote.textContent =
+        "Please wait...";
+
+      formNote.style.color =
+        "#999";
+
+
+      try {
+
+        const formData =
+          new FormData(quoteForm);
+
+
+        const response =
+          await fetch(
+            `${API_BASE}/api/quote`,
+            {
+              method: "POST",
+              body: formData
+            }
+          );
+
+
+        let data = {};
+
+        try {
+
+          data = await response.json();
+
+        } catch (jsonError) {
+
+          data = {};
+
+        }
+
+
+        if (
+          response.ok &&
+          (
+            data.ok === true ||
+            data.success === true ||
+            response.status === 200 ||
+            response.status === 201
+          )
+        ) {
+
+          formNote.textContent =
+            "Thank you! Your request has been submitted successfully.";
+
+          formNote.style.color =
+            "#c99b45";
+
+          quoteForm.reset();
+
+
+        } else {
+
+          formNote.textContent =
+            data.error ||
+            data.message ||
+            "Something went wrong. Please call or WhatsApp us.";
+
+          formNote.style.color =
+            "#d88972";
+
+        }
+
+
+      } catch (error) {
+
+        console.error(
+          "Quote form error:",
+          error
+        );
+
+
+        formNote.textContent =
+          "Unable to connect to the server. Please call or WhatsApp us.";
+
+        formNote.style.color =
+          "#d88972";
+
+      } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Submit Request";
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     SMOOTH ANCHOR SCROLL
+     ========================================================= */
+
+  document.querySelectorAll(
+    'a[href^="#"]'
+  ).forEach(function(anchor) {
+
+    anchor.addEventListener(
+      "click",
+      function(event) {
+
+        const targetId =
+          anchor.getAttribute("href");
+
+        if (
+          targetId === "#" ||
+          !targetId
+        ) {
+          return;
+        }
+
+
+        const target =
+          document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        const headerHeight =
+          header.offsetHeight;
+
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          headerHeight;
+
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  });
+
 </script>
 
 </body>
