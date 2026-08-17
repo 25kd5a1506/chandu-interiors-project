@@ -1269,33 +1269,42 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(5,5,5,0.98);
+        background: #ffffff;
         backdrop-filter: blur(15px);
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
         padding: 30px;
         gap: 0;
+        color: #111111;
       }
 
       .nav-links.open {
         display: flex;
       }
 
-      .nav-links a {
-        padding: 17px 0;
-        border-bottom: 1px solid #222;
-        font-size: 11px;
-      }
+       .nav-links a {
+  padding: 18px 10px;
+  border-bottom: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
 
       .nav-links a::after {
         display: none;
       }
 
       .quote-nav {
-        text-align: center;
-        margin-top: 15px;
-      }
+  text-align: center !important;
+  margin-top: 18px !important;
+  padding: 14px 20px !important;
+  background: var(--gold);
+  color: #000 !important;
+  border-radius: 5px;
+}
 
       .menu-btn {
         display: flex;
