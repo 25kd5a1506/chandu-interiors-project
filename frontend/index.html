@@ -305,30 +305,40 @@
         center/cover no-repeat;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: min(38vw, 470px);
-      height: min(55vw, 520px);
-      right: 8%;
-      top: 50%;
-      transform: translateY(-45%) rotateY(-9deg) rotateX(2deg);
-      transform-origin: center right;
-      background:
-        linear-gradient(180deg, transparent 55%, rgba(0,0,0,.8)),
-        url("assets/gallery/ai_interior_08.jpg") center/cover no-repeat;
-      border: 1px solid rgba(227,188,106,.65);
-      box-shadow: 18px 18px 0 rgba(201,155,69,.16), 0 24px 60px rgba(0,0,0,.42), inset 0 0 0 12px rgba(255,255,255,.035);
-      opacity: .9;
-    }
-
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
         linear-gradient(180deg, rgba(0,0,0,0.25), transparent 45%, rgba(0,0,0,0.65)),
-        linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.38) 100%);
+        linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.38) 100%),
+        linear-gradient(105deg, transparent 0 58%, rgba(201,155,69,.14) 58.1%, transparent 58.3%),
+        linear-gradient(75deg, transparent 0 72%, rgba(255,255,255,.08) 72.1%, transparent 72.25%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 42vw;
+      height: 42vw;
+      max-width: 560px;
+      max-height: 560px;
+      right: -8vw;
+      bottom: -25vw;
+      border: 1px solid rgba(201,155,69,.32);
+      transform: rotate(45deg) perspective(700px) rotateX(58deg);
+      box-shadow:
+        0 0 0 24px rgba(201,155,69,.035),
+        0 0 0 48px rgba(201,155,69,.025),
+        0 0 0 72px rgba(201,155,69,.018);
+      opacity: .8;
+      pointer-events: none;
+      animation: blueprint-drift 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes blueprint-drift {
+      from { transform: rotate(45deg) perspective(700px) rotateX(58deg) translate3d(0, 0, 0); }
+      to { transform: rotate(45deg) perspective(700px) rotateX(58deg) translate3d(-18px, -10px, 0); }
     }
 
     .hero-content {
@@ -340,18 +350,16 @@
       transform: translateZ(24px);
     }
 
-    .hero-content::after {
-      content: "FEATURE WALL / 2026";
+    .hero-content::before {
+      content: "01  /  08";
       position: absolute;
-      right: 9%;
-      bottom: 68px;
-      z-index: 3;
-      color: var(--gold-light);
+      right: 0;
+      top: 84px;
+      color: rgba(227,188,106,.72);
       font-family: "IBM Plex Mono", monospace;
       font-size: 9px;
-      letter-spacing: .16em;
+      letter-spacing: .18em;
       writing-mode: vertical-rl;
-      transform: rotate(180deg);
     }
 
     .hero-label {
@@ -482,6 +490,19 @@
 
     .section-heading {
       margin-bottom: 42px;
+      position: relative;
+    }
+
+    .section-heading::before {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      left: -15px;
+      top: -12px;
+      border-left: 1px solid rgba(201,155,69,.32);
+      border-top: 1px solid rgba(201,155,69,.32);
+      pointer-events: none;
     }
 
     .section-kicker {
@@ -551,6 +572,18 @@
       transition: 0.35s;
     }
 
+    .service-card::after {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      right: -19px;
+      bottom: -19px;
+      border: 1px solid rgba(201,155,69,.2);
+      transform: rotate(45deg);
+      transition: .35s ease;
+    }
+
     .service-card:hover {
       border-color: var(--border);
       transform: translateY(-8px) rotateX(3deg) rotateY(-2deg);
@@ -560,6 +593,12 @@
 
     .service-card:hover::before {
       transform: scaleX(1);
+    }
+
+    .service-card:hover::after {
+      right: -10px;
+      bottom: -10px;
+      border-color: rgba(201,155,69,.55);
     }
 
     .service-icon {
@@ -1366,7 +1405,7 @@
       }
 
       .hero::after,
-      .hero-content::after {
+      .hero-content::before {
         display: none;
       }
 
