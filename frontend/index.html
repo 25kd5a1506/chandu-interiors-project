@@ -292,6 +292,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
+      perspective: 1200px;
       background:
         linear-gradient(
           90deg,
@@ -311,12 +312,13 @@
       height: min(55vw, 520px);
       right: 8%;
       top: 50%;
-      transform: translateY(-45%);
+      transform: translateY(-45%) rotateY(-9deg) rotateX(2deg);
+      transform-origin: center right;
       background:
         linear-gradient(180deg, transparent 55%, rgba(0,0,0,.8)),
         url("assets/gallery/ai_interior_08.jpg") center/cover no-repeat;
       border: 1px solid rgba(227,188,106,.65);
-      box-shadow: 18px 18px 0 rgba(201,155,69,.16), 0 24px 60px rgba(0,0,0,.42);
+      box-shadow: 18px 18px 0 rgba(201,155,69,.16), 0 24px 60px rgba(0,0,0,.42), inset 0 0 0 12px rgba(255,255,255,.035);
       opacity: .9;
     }
 
@@ -325,12 +327,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(
-          180deg,
-          rgba(0,0,0,0.25),
-          transparent 45%,
-          rgba(0,0,0,0.65)
-        );
+        linear-gradient(180deg, rgba(0,0,0,0.25), transparent 45%, rgba(0,0,0,0.65)),
+        linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.38) 100%);
     }
 
     .hero-content {
@@ -339,6 +337,7 @@
       width: min(92%, var(--container));
       margin: auto;
       padding: 90px 0;
+      transform: translateZ(24px);
     }
 
     .hero-content::after {
@@ -535,6 +534,8 @@
       position: relative;
       overflow: hidden;
       transition: 0.35s;
+      transform-style: preserve-3d;
+      perspective: 700px;
     }
 
     .service-card::before {
@@ -552,8 +553,9 @@
 
     .service-card:hover {
       border-color: var(--border);
-      transform: translateY(-6px);
+      transform: translateY(-8px) rotateX(3deg) rotateY(-2deg);
       background: #171717;
+      box-shadow: 12px 16px 0 rgba(201,155,69,.08), 0 18px 30px rgba(0,0,0,.25);
     }
 
     .service-card:hover::before {
@@ -636,6 +638,8 @@
       aspect-ratio: 4 / 3;
       overflow: hidden;
       background: #151515;
+      transform-style: preserve-3d;
+      transition: transform .45s ease, box-shadow .45s ease;
     }
 
     .project.large {
@@ -651,6 +655,12 @@
 
     .project:hover img {
       transform: scale(1.08);
+    }
+
+    .project:hover {
+      transform: translateY(-5px) perspective(900px) rotateX(2deg);
+      box-shadow: 0 14px 28px rgba(0,0,0,.3);
+      z-index: 3;
     }
 
     .project::after {
