@@ -38,8 +38,8 @@
   input:focus{ outline:none; border-color:var(--brass); box-shadow:0 0 0 3px rgba(201,169,106,.1); }
   .password-wrap{ position:relative; }
   .password-wrap input{ padding-right:72px; }
-  .toggle-password{ width:auto; padding:0; position:absolute; right:8px; top:50%; transform:translateY(-50%); border:0; background:transparent; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:9px; text-transform:uppercase; cursor:pointer; }
-  .toggle-password:hover{ color:var(--brass-light); }
+  .toggle-password{ width:auto; padding:7px 9px; position:absolute; right:7px; top:50%; transform:translateY(-50%); border:1px solid rgba(201,169,106,.35); background:#171612; color:var(--brass-light); font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; transition:background .2s ease,border-color .2s ease; }
+  .toggle-password:hover{ background:#282319; border-color:var(--brass); transform:translateY(-50%); }
   .security-note{ display:flex; gap:8px; align-items:center; color:#80786d; font-family:'IBM Plex Mono',monospace; font-size:9px; line-height:1.4; margin:4px 0 22px; }
   .security-note:before{ content:""; width:7px; height:7px; flex:0 0 7px; border:1px solid var(--brass); border-radius:50%; }
   button{
