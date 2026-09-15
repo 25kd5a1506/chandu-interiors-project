@@ -304,6 +304,22 @@
         center/cover no-repeat;
     }
 
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: min(38vw, 470px);
+      height: min(55vw, 520px);
+      right: 8%;
+      top: 50%;
+      transform: translateY(-45%);
+      background:
+        linear-gradient(180deg, transparent 55%, rgba(0,0,0,.8)),
+        url("assets/gallery/ai_interior_08.jpg") center/cover no-repeat;
+      border: 1px solid rgba(227,188,106,.65);
+      box-shadow: 18px 18px 0 rgba(201,155,69,.16), 0 24px 60px rgba(0,0,0,.42);
+      opacity: .9;
+    }
+
     .hero::before {
       content: "";
       position: absolute;
@@ -323,6 +339,20 @@
       width: min(92%, var(--container));
       margin: auto;
       padding: 90px 0;
+    }
+
+    .hero-content::after {
+      content: "FEATURE WALL / 2026";
+      position: absolute;
+      right: 9%;
+      bottom: 68px;
+      z-index: 3;
+      color: var(--gold-light);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: .16em;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
     }
 
     .hero-label {
@@ -1323,6 +1353,11 @@
         margin-top: 68px;
         min-height: 650px;
         background-position: 62% center;
+      }
+
+      .hero::after,
+      .hero-content::after {
+        display: none;
       }
 
       .hero-content {
