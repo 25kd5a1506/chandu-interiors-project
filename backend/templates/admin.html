@@ -877,7 +877,7 @@ select:focus{
 
               <td>
                 <div class="received">
-                  {{ lead.created_at.strftime('%d %b, %I:%M %p') }}
+                  {{ lead.created_at|india_time }}
                 </div>
               </td>
 

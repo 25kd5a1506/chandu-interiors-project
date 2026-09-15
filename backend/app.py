@@ -1,5 +1,7 @@
 import os
 from functools import wraps
+from datetime import timezone
+from zoneinfo import ZoneInfo
 
 from flask import (
     Flask, request, jsonify, render_template, redirect,
@@ -25,6 +27,15 @@ os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
 with app.app_context():
     db.create_all()
+
+
+@app.template_filter("india_time")
+def india_time(value):
+    if value is None:
+        return ""
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=timezone.utc)
+    return value.astimezone(ZoneInfo("Asia/Kolkata")).strftime("%d %b, %I:%M %p")
 
 
 # ---------------------------------------------------------------- helpers --
