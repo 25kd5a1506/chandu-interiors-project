@@ -34,6 +34,12 @@ def index():
     return jsonify({"ok": True, "service": "chandu-interiors-backend", "message": "Backend is running. Frontend file not found."})
 
 
+@app.route("/assets/<path:filename>")
+def frontend_asset(filename):
+    assets_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "assets"))
+    return send_from_directory(assets_path, filename)
+
+
 def allowed_file(filename):
     return (
         "." in filename
