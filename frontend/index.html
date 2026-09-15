@@ -316,31 +316,6 @@
         linear-gradient(75deg, transparent 0 72%, rgba(255,255,255,.08) 72.1%, transparent 72.25%);
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 42vw;
-      height: 42vw;
-      max-width: 560px;
-      max-height: 560px;
-      right: -8vw;
-      bottom: -25vw;
-      border: 1px solid rgba(201,155,69,.32);
-      transform: rotate(45deg) perspective(700px) rotateX(58deg);
-      box-shadow:
-        0 0 0 24px rgba(201,155,69,.035),
-        0 0 0 48px rgba(201,155,69,.025),
-        0 0 0 72px rgba(201,155,69,.018);
-      opacity: .8;
-      pointer-events: none;
-      animation: blueprint-drift 14s ease-in-out infinite alternate;
-    }
-
-    @keyframes blueprint-drift {
-      from { transform: rotate(45deg) perspective(700px) rotateX(58deg) translate3d(0, 0, 0); }
-      to { transform: rotate(45deg) perspective(700px) rotateX(58deg) translate3d(-18px, -10px, 0); }
-    }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -1404,7 +1379,6 @@
         background-position: 62% center;
       }
 
-      .hero::after,
       .hero-content::before {
         display: none;
       }
