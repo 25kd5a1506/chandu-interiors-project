@@ -10,15 +10,18 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     background:
-      radial-gradient(circle at 12% 18%,rgba(201,169,106,.13),transparent 28%),
-      radial-gradient(circle at 88% 82%,rgba(201,169,106,.08),transparent 30%),
+      linear-gradient(115deg,transparent 0 48%,rgba(201,169,106,.07) 48.1%,transparent 48.3%),
+      linear-gradient(25deg,transparent 0 62%,rgba(201,169,106,.05) 62.1%,transparent 62.3%),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 110px),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 110px),
       var(--ink);
     color:var(--stone); font-family:'Inter',sans-serif;
     min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
   }
   .login-shell{ width:min(100%,960px); display:grid; grid-template-columns:1fr 1fr; background:var(--ink-soft); border:1px solid var(--line); box-shadow:0 30px 90px rgba(0,0,0,.42); overflow:hidden; }
-  .brand-panel{ position:relative; min-height:520px; padding:48px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,rgba(201,169,106,.16),transparent 48%),#151512; border-right:1px solid var(--line); }
+  .brand-panel{ position:relative; min-height:520px; padding:48px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,rgba(201,169,106,.14),transparent 48%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 1px,transparent 1px 34px),#151512; border-right:1px solid var(--line); }
   .brand-panel:after{ content:""; position:absolute; width:230px; height:230px; border:1px solid rgba(201,169,106,.2); border-radius:50%; right:-92px; bottom:-80px; box-shadow:0 0 0 20px rgba(201,169,106,.03),0 0 0 40px rgba(201,169,106,.025); }
+  .brand-panel:before{ content:""; position:absolute; width:120px; height:120px; right:42px; top:42px; border-top:1px solid rgba(201,169,106,.35); border-right:1px solid rgba(201,169,106,.35); }
   .brand{ position:relative; z-index:1; display:flex; align-items:center; gap:14px; }
   .logo-mark{ width:48px; height:48px; border:1px solid var(--brass); display:grid; place-items:center; color:var(--brass-light); font-family:'Instrument Serif',serif; font-size:25px; }
   .brand-name{ font-family:'Instrument Serif',serif; font-size:30px; line-height:1; }
