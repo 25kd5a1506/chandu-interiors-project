@@ -6,32 +6,75 @@
 <title>Admin Login — Chandu Interiors</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#1d1b18; --stone:#ece6dc; --sage:#57654c; --sage-dark:#3c4635; --brass:#b08d57; --line:rgba(29,27,24,0.14); }
+  :root{ --ink:#090909; --ink-soft:#121210; --stone:#f0eadf; --muted:#a8a092; --brass:#c9a96a; --brass-light:#e1c58c; --line:rgba(201,169,106,.2); }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
-    background:var(--ink); color:var(--stone); font-family:'Inter',sans-serif;
-    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(201,169,106,.13),transparent 28%),
+      radial-gradient(circle at 88% 82%,rgba(201,169,106,.08),transparent 30%),
+      var(--ink);
+    color:var(--stone); font-family:'Inter',sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
   }
-  .card{ background:var(--stone); color:var(--ink); width:100%; max-width:380px; padding:44px 36px; border:1px solid var(--line); }
-  h1{ font-family:'Instrument Serif', serif; font-weight:400; font-size:30px; margin-bottom:6px; }
-  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass); margin-bottom:18px; display:block;}
-  .field{ margin-bottom:18px; display:flex; flex-direction:column; gap:7px; }
-  label{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#4a463f; }
-  input{ border:none; border-bottom:1px solid var(--line); background:transparent; padding:10px 2px; font-size:15.5px; font-family:'Inter',sans-serif; }
-  input:focus{ outline:none; border-bottom-color:var(--brass); }
+  .login-shell{ width:min(100%,960px); display:grid; grid-template-columns:1fr 1fr; background:var(--ink-soft); border:1px solid var(--line); box-shadow:0 30px 90px rgba(0,0,0,.42); overflow:hidden; }
+  .brand-panel{ position:relative; min-height:520px; padding:48px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,rgba(201,169,106,.16),transparent 48%),#151512; border-right:1px solid var(--line); }
+  .brand-panel:after{ content:""; position:absolute; width:230px; height:230px; border:1px solid rgba(201,169,106,.2); border-radius:50%; right:-92px; bottom:-80px; box-shadow:0 0 0 20px rgba(201,169,106,.03),0 0 0 40px rgba(201,169,106,.025); }
+  .brand{ position:relative; z-index:1; display:flex; align-items:center; gap:14px; }
+  .logo-mark{ width:48px; height:48px; border:1px solid var(--brass); display:grid; place-items:center; color:var(--brass-light); font-family:'Instrument Serif',serif; font-size:25px; }
+  .brand-name{ font-family:'Instrument Serif',serif; font-size:30px; line-height:1; }
+  .brand-name em{ color:var(--brass-light); }
+  .brand-tag{ margin-top:7px; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:.16em; text-transform:uppercase; }
+  .brand-copy{ position:relative; z-index:1; max-width:290px; }
+  .brand-copy strong{ display:block; color:var(--brass-light); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; }
+  .brand-copy h2{ margin-top:16px; font-family:'Instrument Serif',serif; font-weight:400; font-size:46px; line-height:.98; }
+  .brand-copy p{ margin-top:18px; color:var(--muted); font-size:13px; line-height:1.7; }
+  .card{ padding:48px; display:flex; flex-direction:column; justify-content:center; background:rgba(255,255,255,.015); }
+  h1{ font-family:'Instrument Serif', serif; font-weight:400; font-size:36px; margin-bottom:8px; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--brass); margin-bottom:16px; display:block; }
+  .intro{ color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:28px; }
+  .field{ margin-bottom:19px; display:flex; flex-direction:column; gap:8px; }
+  label{ color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; }
+  input{ width:100%; border:1px solid rgba(255,255,255,.12); color:var(--stone); background:#0b0b0a; padding:13px 14px; font-size:14px; font-family:'Inter',sans-serif; transition:border-color .2s,box-shadow .2s; }
+  input:focus{ outline:none; border-color:var(--brass); box-shadow:0 0 0 3px rgba(201,169,106,.1); }
+  .password-wrap{ position:relative; }
+  .password-wrap input{ padding-right:72px; }
+  .toggle-password{ width:auto; padding:0; position:absolute; right:8px; top:50%; transform:translateY(-50%); border:0; background:transparent; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:9px; text-transform:uppercase; cursor:pointer; }
+  .toggle-password:hover{ color:var(--brass-light); }
+  .security-note{ display:flex; gap:8px; align-items:center; color:#80786d; font-family:'IBM Plex Mono',monospace; font-size:9px; line-height:1.4; margin:4px 0 22px; }
+  .security-note:before{ content:""; width:7px; height:7px; flex:0 0 7px; border:1px solid var(--brass); border-radius:50%; }
   button{
-    width:100%; margin-top:8px; padding:13px; background:var(--sage-dark); color:var(--stone);
-    border:none; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase;
-    cursor:pointer; transition:background .2s ease;
+    width:100%; padding:14px; background:var(--brass); color:#090909;
+    border:1px solid var(--brass); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    cursor:pointer; transition:background .2s ease,transform .2s ease;
   }
-  button:hover{ background:var(--ink); }
-  .flash{ background:#f4d9d0; color:#7a2f1c; padding:10px 12px; font-size:13.5px; margin-bottom:18px; }
+  button:hover{ background:var(--brass-light); transform:translateY(-2px); }
+  .flash{ background:rgba(184,121,121,.12); color:#d99a8d; border:1px solid rgba(184,121,121,.3); padding:11px 12px; font-size:12px; line-height:1.5; margin-bottom:18px; }
+  .copyright{ margin-top:26px; color:#6f685e; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
+  @media(max-width:700px){ body{padding:14px;} .login-shell{grid-template-columns:1fr;} .brand-panel{min-height:260px; padding:28px;} .brand-copy{margin-top:48px;} .brand-copy h2{font-size:34px;} .brand-copy p{display:none;} .card{padding:32px 28px;} }
+  @media(max-width:420px){ .brand-panel{min-height:220px;} .brand-copy{margin-top:34px;} .brand-name{font-size:26px;} .card{padding:28px 22px;} }
 </style>
 </head>
 <body>
-  <div class="card">
-    <span class="eyebrow">Chandu Interiors</span>
-    <h1>Admin Login</h1>
+  <div class="login-shell">
+    <section class="brand-panel">
+      <div class="brand">
+        <div class="logo-mark">C</div>
+        <div>
+          <div class="brand-name">Chandu <em>Interiors</em></div>
+          <div class="brand-tag">Interior Design · Furniture · Woodwork</div>
+        </div>
+      </div>
+      <div class="brand-copy">
+        <strong>Private workspace</strong>
+        <h2>Shape the details behind every space.</h2>
+        <p>Review enquiries, follow project progress and keep every customer conversation moving.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="eyebrow">Secure access</span>
+      <h1>Admin Login</h1>
+      <p class="intro">Sign in to manage customer enquiries and project requests.</p>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
@@ -44,10 +87,26 @@
       </div>
       <div class="field">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <div class="password-wrap">
+          <input type="password" id="password" name="password" required>
+          <button class="toggle-password" type="button" id="togglePassword" aria-label="Show password">Show</button>
+        </div>
       </div>
-      <button type="submit">Sign In</button>
+      <div class="security-note">Protected admin area · authorised access only</div>
+      <button type="submit">Enter Dashboard</button>
     </form>
+      <div class="copyright">Chandu Interior Designs · 2026</div>
+    </section>
   </div>
+  <script>
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+    togglePassword.addEventListener('click', function () {
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+      togglePassword.textContent = isHidden ? 'Hide' : 'Show';
+      togglePassword.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+  </script>
 </body>
 </html>
