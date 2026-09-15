@@ -12,7 +12,10 @@ from config import Config
 from models import db, Lead
 from notifications import notify_new_lead
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=os.path.join(os.path.dirname(__file__), "templates"),
+)
 app.config.from_object(Config)
 
 db.init_app(app)
@@ -171,6 +174,12 @@ def admin_login():
 def admin_logout():
     session.pop("is_admin", None)
     return redirect(url_for("admin_login"))
+
+
+@app.route("/admin.html")
+@app.route("/templates/admin.html")
+def admin_page_alias():
+    return redirect(url_for("admin_dashboard"))
 
 
 # ------------------------------------------------------------ admin panel --
